@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   // landing page
 
   medimeter: {
-    width: 200,
+    width: 220,
     height: 50,
     padding: 20,
     marginTop: 15,
