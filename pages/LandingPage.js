@@ -5,9 +5,17 @@ import styles from '../styles';
 import logo from '../assets/logo.png';
 import medimeter from '../assets/medimeter.png';
 import leftdown from '../assets/leftdown.png';
+import { useNavigation } from '@react-navigation/native';
+
 
 const LandingPage = () => {
-  return (
+    const navigation = useNavigation();
+
+    const handleContinue = () => {
+        navigation.navigate('Decision');
+    }
+  
+    return (
     <View style={styles.container}>
       <Image style={styles.logo} source = {logo}/>
         <View style={styles.content}>
@@ -20,10 +28,10 @@ const LandingPage = () => {
         </View>
         <View style={[styles.content,styles.nextstep]}>
             <Text style={styles.buttoninfo}>{'Click this button to see the next steps: '}</Text>
-            <Image style={styles.leftdown}source = {leftdown}/>
+            <Image style={styles.leftdown} source = {leftdown}/>
         </View>
         <View style={styles.continue}>
-            <TouchableOpacity onPress = {() => {}}>
+            <TouchableOpacity onPress={handleContinue}>
                 <Text style={styles.continueText}>{'CONTINUE'}</Text>
             </TouchableOpacity>
         </View>

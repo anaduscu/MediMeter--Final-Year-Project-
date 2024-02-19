@@ -58,6 +58,13 @@ const styles = StyleSheet.create({
     marginLeft: -15,
   },
 
+  rightdown: {
+    width: 100,
+    height: 100,
+    marginTop: 35,
+    marginRight: 15,
+  },
+
   continue: {
     width: 130,
     height: 40,
