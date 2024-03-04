@@ -15,7 +15,7 @@ const Decision = () => {
   }
 
   const handleSignUp = () => {
-    navigation.navigate('SignUp');
+    navigation.navigate('Welcome1');
   }
 
   return (
@@ -25,20 +25,24 @@ const Decision = () => {
             <Text style={styles.heading}>{'Step 1'}</Text>
         </View> 
         <View>
-            <Text>{'Before you can use your \nMedication Assistant,\n please follow the next instructions'}</Text>
+            <Text style={styles.info}>{'Before you can use your \nMedication Assistant, please\nfollow the next instructions'}</Text>
         </View>
-        <View style={styles.continue}>
-            <Text style={styles.buttoninfo}>{'If you have used \nMediMeter before, \nplease click here:'}</Text>
+        <View style={[styles.decision,styles.nextstep]}>
             <Image style={styles.rightdown} source={rightdown}></Image>
-            <TouchableOpacity onPress={handleLogin}>
-                <Text style={styles.continueText}>{'LOG IN'}</Text>
-            </TouchableOpacity>
+            <Text style={styles.logininfo}>{'If you have used \nMediMeter before, \nplease click here:'}</Text>
         </View>
-        <View style={styles.continue}>
-            <Text style={styles.buttoninfo}>{'If you are new to \nMediMeter, please click here:'}</Text>
+        <View style={styles.login}>
+          <TouchableOpacity onPress={handleLogin}>
+              <Text style={styles.buttonText}>{'LOG IN'}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.content,styles.nextstep]}>
+            <Text style={styles.signupinfo}>{'If you are new to \nMediMeter, please click here:'}</Text>
             <Image style={styles.leftdown}source={leftdown}></Image>
+        </View>
+        <View style={styles.signup}>
             <TouchableOpacity onPress={handleSignUp}>
-                <Text style={styles.continueText}>{'SIGN UP'}</Text>
+                <Text style={styles.buttonText}>{'SIGN UP'}</Text>
             </TouchableOpacity>
         </View>
     </View>

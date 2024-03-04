@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: 'flex-end',
     marginRight: 20,
-    marginBottom: 20,
+    marginBottom: 5,
     marginTop: 20,
     width: 95,
     height: 95,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     height: 90,
     fontSize: 18,
     padding: 20,
-    marginTop: 15,
+    marginTop: 25,
     marginBottom: 30,
     color: 'white',
     fontWeight: 'bold',
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   leftdown: {
     width: 100,
     height: 100,
-    marginTop: 35,
+    marginTop: 45,
     marginLeft: -15,
   },
 
@@ -62,14 +62,19 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginTop: 35,
-    marginRight: 15,
+    marginRight: -15,
+  },
+
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 
   continue: {
     width: 130,
     height: 40,
     alignSelf: 'flex-end', // Align the component to the right
-    marginRight: 10, 
     marginTop: 15,
     marginRight: 35,
     backgroundColor: '#FF443A',
@@ -77,11 +82,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  continueText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
+
+  
 
   // landing page
 
@@ -92,7 +94,152 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 30,
   },
-  // Add more styles as needed
+  
+  // decision page
+
+  info: {
+    backgroundColor: '#24C697',
+    width: 350,
+    height: 130,
+    padding: 20,
+    marginTop: 15,
+    marginBottom: 30,
+    color: '#1A1F53',
+    fontWeight: 'bold',
+    fontSize: 23,
+    marginLeft: 20,
+  },
+
+  decision: {
+    marginLeft: 85,
+  },
+
+  login: {
+    width: 100,
+    height: 40,
+    alignSelf: 'flex-start', // Align the component to the right
+    marginLeft: 65, 
+    marginTop: 10,
+    backgroundColor: '#FF443A',
+    borderRadius: 10, // Set the border radius to make it rounded
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  signup: {
+    width: 100,
+    height: 40,
+    alignSelf: 'flex-end', // Align the component to the right
+    marginRight: 65, 
+    marginTop: -10,
+    backgroundColor: '#FF443A',
+    borderRadius: 10, // Set the border radius to make it rounded
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  logininfo: {
+    backgroundColor: '#335AF8',
+    width: 200,
+    height: 110,
+    fontSize: 18,
+    padding: 20,
+    marginTop: 10,
+    marginRight: 10,
+    marginBottom: 15,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+
+  signupinfo: {
+    backgroundColor: '#335AF8',
+    width: 200,
+    height: 110,
+    fontSize: 18,
+    padding: 20,
+    marginTop: 30,
+    marginBottom: 30,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+
+  // welcome page
+
+  instr: {
+    color: 'white',
+    fontSize: 23,
+    fontWeight: 'bold',
+    width: 360,
+    marginBottom: -10,
+    marginTop: 10,
+  },
+
+  back: {
+    backgroundColor: '#24C697',
+    width: 232,
+    height: 130,
+    padding: 20,
+    marginTop: 15,
+    marginBottom: 30,
+    color: '#1A1F53',
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginRight: 3,
+  },
+
+  footer : {
+    backgroundColor: '#1A1F53',
+    justifyContent: 'center',
+    marginLeft: -20,
+    flexDirection: 'row',
+    marginBottom: -20,
+    borderTopColor: 'white', // You can customize the color
+    borderTopWidth: 2,
+    borderTopLength: 2,
+    marginVertical: 5,
+  },
+
+  arrow1 : {
+    width: 80,
+    height: 80,
+    marginTop: 45,
+  },
+
+  arrow2 : {
+    width: 80,
+    height: 80,
+    marginTop: 15,
+    marginRight: 15,
+  },
+
+  backbutton: {
+    width: 100,
+    height: 40,
+    marginTop: 100,
+    marginLeft: -70,
+    backgroundColor: '#FF443A',
+    borderRadius: 10, // Set the border radius to make it rounded
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  continuebutton: {
+    width: 100,
+    height: 40,
+    marginLeft: 60,
+    marginTop: -15,
+    backgroundColor: '#FF443A',
+    borderRadius: 10, // Set the border radius to make it rounded
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  next: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginTop: -1,
+  },
+
 });
 
 // info (green box)

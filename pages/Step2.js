@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 import leftdown from '../assets/leftdown.png';
 import rightdown from '../assets/rightdown.png';
 
-const Decision = ({navigation}) => {
+const Decision = () => {
   return (
     <View style={[styles.container, styles.Text]}>
       <Image style={styles.logo} source = {logo}/>

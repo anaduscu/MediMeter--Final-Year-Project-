@@ -1,0 +1,48 @@
+<!-- Great! On macOS, you can follow these steps to run your Django project within a virtual environment:
+
+1. **Create a Virtual Environment:**
+   Open your terminal and navigate to your project's directory. Then, run the following command to create a virtual environment named `venv`:
+   ```bash
+   python3 -m venv venv
+   ```
+
+2. **Activate the Virtual Environment:**
+   Activate the virtual environment using the following command:
+   ```bash
+   source venv/bin/activate
+   ```
+
+   After activation, your terminal prompt should change to indicate the active virtual environment.
+
+3. **Install Django:**
+   While the virtual environment is active, install Django using pip:
+   ```bash
+   pip install django
+   ```
+
+4. **Run Migrations:**
+   Navigate to your Django project's root directory (where `manage.py` is located) and run:
+   ```bash
+   python manage.py migrate
+   ```
+
+5. **Create a Django App:**
+   Now, you can try creating the `backend` app again:
+   ```bash
+   python manage.py startapp backend
+   ```
+
+6. **Run the Development Server:**
+   Start the Django development server:
+   ```bash
+   python manage.py runserver
+   ```
+
+   The server will be accessible at `http://127.0.0.1:8000/` by default. Open this URL in your web browser to see the Django welcome page.
+
+Remember to activate the virtual environment whenever you work on your project, and deactivate it when you're done:
+```bash
+deactivate
+```
+
+Feel free to let me know if you encounter any issues or if you have further questions! -->

@@ -32,7 +32,7 @@ const LandingPage = () => {
         </View>
         <View style={styles.continue}>
             <TouchableOpacity onPress={handleContinue}>
-                <Text style={styles.continueText}>{'CONTINUE'}</Text>
+                <Text style={styles.buttonText}>{'CONTINUE'}</Text>
             </TouchableOpacity>
         </View>
     </View>
