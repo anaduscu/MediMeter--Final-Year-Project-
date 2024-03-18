@@ -1,10 +1,10 @@
 // ExampleComponent.js
 import React from 'react';
-import {Text, View, Image, Button, ScrollView, TouchableOpacity} from 'react-native';
-import styles from '../styles';
-import logo from '../assets/logo.png';
-import medimeter from '../assets/medimeter.png';
-import leftdown from '../assets/leftdown.png';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
+import styles from '../frontend/styles.js';
+import logo from '../frontend/assets/logo.png';
+import medimeter from '../frontend/assets/medimeter.png';
+import leftdown from '../frontend/assets/leftdown.png';
 import { useNavigation } from '@react-navigation/native';
 
 

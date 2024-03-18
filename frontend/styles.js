@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
-  content: {
+  content: { 
     marginLeft: 20,
   },
   logo: {
@@ -240,7 +240,93 @@ const styles = StyleSheet.create({
     marginTop: -1,
   },
 
+  // signup page
+
+  form : {
+    marginLeft: 20,
+    width: 350,
+    marginBottom: -10,
+    marginTop: -15,
+  },
+
+  input: {
+    width: 300,
+    height: 35,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
+
+  inputTitle: {
+    color: 'white',
+    fontSize: 15,
+    marginBottom: 10,
+  },
+
+  subheading: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    width: 330,
+    marginTop: 15,
+  },
+
+  keyboardinstr: {
+    marginLeft: 0,
+    padding: 10,
+    paddingRight: 20,
+    fontSize: 14,
+    width: 329,
+    height: 80,
+  },
+
+  signupbutton: {
+    marginTop: 45,
+    marginLeft: 15,
+  },
+
+  bluebox: {
+    fontSize: 15,
+    height: 75,
+    width: 230,
+    padding: 10,
+  },
+
+  // step2
+
+  info2: {
+    backgroundColor: '#24C697',
+    width: 350,
+    height: 130,
+    padding: 20,
+    marginTop: 25,
+    marginBottom: 30,
+    color: '#1A1F53',
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginLeft: 20,
+  },
+
+  nextstep2: {
+    marginTop: -40,
+  },
+
+  buttoninfo2: {
+    fontSize: 16,
+  },
+
+  button2 : {
+    alignSelf: 'flex-end',
+    marginRight: 0,
+  },
+    
+  
 });
+
+
+
+
 
 // info (green box)
 // instr (white main text)
