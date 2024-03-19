@@ -298,10 +298,10 @@ const styles = StyleSheet.create({
   info2: {
     backgroundColor: '#24C697',
     width: 350,
-    height: 130,
-    padding: 20,
+    height: 110,
+    padding: 10,
     marginTop: 25,
-    marginBottom: 30,
+    marginBottom: 90,
     color: '#1A1F53',
     fontWeight: 'bold',
     fontSize: 18,
@@ -309,17 +309,24 @@ const styles = StyleSheet.create({
   },
 
   nextstep2: {
-    marginTop: -40,
+    marginTop: -90,
   },
 
   buttoninfo2: {
     fontSize: 16,
+    height: 80,
   },
 
   button2 : {
-    alignSelf: 'flex-end',
-    marginRight: 0,
+    marginLeft: 130,
+    marginTop: -45,
   },
+
+  loginInfo: {
+    width: 350,
+    height: 110,
+    fontSize: 18,
+  }
     
   
 });

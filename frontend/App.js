@@ -7,6 +7,8 @@ import Decision from '../frontend/Decision';
 import SignUp from '../frontend/Guest/SignUp';
 import Welcome1 from '../frontend/Guest/Welcome1';
 import Step2 from '../frontend/Guest/Step2';
+import LogIn from '../frontend/User/LogIn';
+import Dashboard from '../frontend/User/Dashboard';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +24,8 @@ const App = () => {
         <Stack.Screen name="Welcome1" component={Welcome1} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Step2" component={Step2} />
+        <Stack.Screen name="LogIn" component={LogIn} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

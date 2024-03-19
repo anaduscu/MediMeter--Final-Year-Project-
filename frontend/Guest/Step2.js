@@ -9,13 +9,13 @@ const Step2 = () => {
   const navigation = useNavigation();
 
     const handleContinue = () => {
-    navigation.navigate('Decision');
+    navigation.navigate('Dashboard');
     }
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source = {logo}/>
         <View style={styles.content}>
-            <Text style={styles.heading}>{'Second Step'}</Text>
+            <Text style={styles.heading}>{'Step 2'}</Text>
         </View> 
         <View style={styles.content}>
             <Text style={styles.instr}>{'You have now created a MediMeter Account. That means we can start managing your medication together! \n'}</Text>
@@ -27,7 +27,7 @@ const Step2 = () => {
         <View style={[styles.content,styles.nextstep,styles.nextstep2]}>
             <Text style={[styles.buttoninfo,styles.buttoninfo2]}>{'Click the red button to see the next steps: '}</Text>
         </View>
-        <View >
+        <View style={styles.button2}>
             <TouchableOpacity style={[styles.continuebutton,styles.button2]} onPress={handleContinue}>
                 <Text style={styles.buttonText}>{'CONTINUE'}</Text>
             </TouchableOpacity>

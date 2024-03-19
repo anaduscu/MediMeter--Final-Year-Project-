@@ -11,7 +11,7 @@ const Decision = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    navigation.navigate('LandingPage');
+    navigation.navigate('LogIn');
   }
 
   const handleSignUp = () => {
