@@ -4,8 +4,7 @@ import styles from '../../frontend/styles.js';
 import logo from '../../frontend/assets/logo.png';
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import Cookies from 'js-cookie';
-
+import { Alert } from 'react-native';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -14,40 +13,51 @@ const LogIn = () => {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    console.log('Email:', email);
-    console.log('Password:', password);
-  
+    if (!email || !password) {
+      Alert.alert('Incomplete Form', 'Please fill in all text boxes before continuing.');
+      return;
+    }
+
     try {
       // Fetch CSRF token
       const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
       const csrfData = await csrfResponse.json();
       const csrfToken = csrfData.csrf_token;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        Alert.alert('Invalid Email', 'Please enter a valid email address.');
+        return;
+      }
   
       // Make the login request with the CSRF token
-      const apiUrl = 'http://192.168.0.210:8000/MediMeter/user/';
-      const response = await fetch(apiUrl, {
+      // Login request
+      const response = await fetch('http://192.168.0.210:8000/MediMeter/user/login/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken,
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+            email: email,
+            password: password,
         })
       });
-  
-      const data = await response.json();
-      if (response.ok) {
-        console.log('Login successful:', data);
-        Cookies.set('email', email);
-        navigation.navigate('Dashboard'); //dashboard
+
+      if (!response.ok) {
+        const responseData = await response.json();
+        if (responseData.error === 'Invalid email or password') {
+          Alert.alert('Login failed', 'Looks like the email or password you entered is incorrect. Please try again. Ask someone you trust if you are unsure of your details.');
+        } else {
+          throw new Error('Login Failed');
+        }
       } else {
-        console.log('Login failed:', data);
-        throw new Error(data.error || 'Login failed');
+        const data = await response.json();
+        console.log('Login successful:', data);
+        navigation.navigate('Dashboard');
       }
     } catch (error) {
-      console.log('Error during login:', error.message);
+      console.log('Error during login:', error);
     }
   
   };

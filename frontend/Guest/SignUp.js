@@ -20,32 +20,34 @@ const SignUp = () => {
       return;
     }
   
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
-    console.log('Email:', email);
-    console.log('Password:', password);
-  
     try {
       // Fetch CSRF token
       const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
       const csrfData = await csrfResponse.json();
       const csrfToken = csrfData.csrf_token;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        Alert.alert('Invalid Email', 'Please enter a valid email address.');
+        return;
+      }
   
       // Make the registration request with the CSRF token
-      const apiUrl = 'http://192.168.0.210:8000/MediMeter/user/';
-      const response = await fetch(apiUrl, {
+      // Registration request
+      const response = await fetch('http://192.168.0.210:8000/MediMeter/user/register/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken,  // Include the CSRF token in the headers
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
         })
       });
+
   
       if (!response.ok) {
         const responseData = await response.json();
@@ -61,7 +63,6 @@ const SignUp = () => {
       }
     } catch (error) {
       console.log('Error during registration:', error);
-      Alert.alert('Registration Failed', 'Failed to register. Please try again.');
     }
   };
   
