@@ -4,6 +4,8 @@ from django.http import JsonResponse
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ValidationError
+
 
 def get_csrf_token(request):
     csrf_token = get_token(request)
@@ -32,6 +34,7 @@ def login_user(request):
     else:
         return JsonResponse({'message': 'Invalid request method'})
     
+
 def register_user(request):
     if request.method == 'POST':
         # Parse JSON data from request body
@@ -46,12 +49,21 @@ def register_user(request):
         email = data.get('email', '')
         password = data.get('password', '')
 
-        print('Received data:', data)
+        # Check for incomplete data
+        if not (firstname and lastname and email and password):
+            return JsonResponse({'error': 'Incomplete form data'}, status=400)
 
-        # Create a new user without a username
-        user = User(firstname=firstname, lastname=lastname, email=email, password=password)
-        user.save()
+        # Check if user already exists
+        if User.objects.filter(email=email).exists():
+            return JsonResponse({'error': 'User with this email already exists'}, status=409)
 
-        return JsonResponse({'message': 'User registered successfully'})
+        try:
+            # Create a new user without a username
+            user = User(firstname=firstname, lastname=lastname, email=email, password=password)
+            user.full_clean()  # Validate the user object
+            user.save()
+            return JsonResponse({'message': 'User registered successfully'})
+        except ValidationError as e:
+            return JsonResponse({'error': e.message_dict}, status=400)
     else:
-        return JsonResponse({'message': 'Invalid request method'})
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
