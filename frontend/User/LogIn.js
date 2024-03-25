@@ -5,6 +5,7 @@ import logo from '../../frontend/assets/logo.png';
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -65,7 +66,7 @@ const LogIn = () => {
   
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior='position'>
       <Image style={styles.logo} source = {logo}/>
         <View style={styles.content}>
             <Text style={styles.heading}>{'Logging In'}</Text>
@@ -95,7 +96,7 @@ const LogIn = () => {
                 <Text style={styles.buttonText}>{'LOG IN'}</Text>
             </TouchableOpacity>
         </View>
-    </View> 
+    </KeyboardAvoidingView> 
     );
 
     

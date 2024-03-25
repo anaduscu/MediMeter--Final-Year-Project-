@@ -4,6 +4,7 @@ import styles from '../../frontend/styles.js';
 import logo from '../../frontend/assets/logo.png';
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { KeyboardAvoidingView } from 'react-native';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -19,6 +20,7 @@ const SignUp = () => {
       Alert.alert('Incomplete Form', 'Please fill in all text boxes before continuing.');
       return;
     }
+
   
     try {
       // Fetch CSRF token
@@ -63,12 +65,13 @@ const SignUp = () => {
       }
     } catch (error) {
       console.log('Error during registration:', error);
+      Alert.alert('Registration Failed', 'Failed to register. Please try again.');
     }
   };
   
   
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior='position'>
       <Image style={styles.logo} source={logo} />
       <View style={styles.content}>
         <Text style={styles.heading}>{'Creating Account'}</Text>
@@ -116,7 +119,7 @@ const SignUp = () => {
           <Text style={styles.buttonText}>{'SIGN UP'}</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
