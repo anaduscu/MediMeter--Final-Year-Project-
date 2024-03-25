@@ -49,10 +49,6 @@ def register_user(request):
         email = data.get('email', '')
         password = data.get('password', '')
 
-        # Check for incomplete data
-        if not (firstname and lastname and email and password):
-            return JsonResponse({'error': 'Incomplete form data'}, status=400)
-
         # Check if user already exists
         if User.objects.filter(email=email).exists():
             return JsonResponse({'error': 'User with this email already exists'}, status=409)

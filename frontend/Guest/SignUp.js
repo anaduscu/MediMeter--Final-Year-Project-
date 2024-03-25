@@ -14,54 +14,57 @@ const SignUp = () => {
   const navigation = useNavigation();
 
   const handleSignUp = async () => {
-      // Check if any field is empty
-      if (!firstName || !lastName || !email || !password) {
-        Alert.alert('Looks like you have not filled in all text boxes yet', 'Please type in all your details before continuing.');
-        return;
-      }
-    
-      console.log('First Name:', firstName);
-      console.log('Last Name:', lastName);
-      console.log('Email:', email);
-      console.log('Password:', password);
-    
-      try {
-        // Fetch CSRF token
-        const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
-        const csrfData = await csrfResponse.json();
-        const csrfToken = csrfData.csrf_token;
-    
-        // Make the registration request with the CSRF token
-        const apiUrl = 'http://192.168.0.210:8000/MediMeter/user/';
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken,  // Include the CSRF token in the headers
-          },
-          body: JSON.stringify({
-            firstname: firstName,
-            lastname: lastName,
-            email: email,
-            password: password,
-          })
-        });
-    
-        if (!response.ok) {
-          // Check if the error is due to existing account with the same email
-          const responseData = await response.json();
-          if (responseData.error === 'Existing account') {
-          } else {
-            Alert.alert('Failed to register', 'Looks like you already have an account with this email. Please click the BACK button and select the LOG IN option, or use a different email.');
-          }
+    // Check if any field is empty
+    if (!firstName || !lastName || !email || !password) {
+      Alert.alert('Incomplete Form', 'Please fill in all text boxes before continuing.');
+      return;
+    }
+  
+    console.log('First Name:', firstName);
+    console.log('Last Name:', lastName);
+    console.log('Email:', email);
+    console.log('Password:', password);
+  
+    try {
+      // Fetch CSRF token
+      const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
+      const csrfData = await csrfResponse.json();
+      const csrfToken = csrfData.csrf_token;
+  
+      // Make the registration request with the CSRF token
+      const apiUrl = 'http://192.168.0.210:8000/MediMeter/user/';
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,  // Include the CSRF token in the headers
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        })
+      });
+  
+      if (!response.ok) {
+        const responseData = await response.json();
+        if (responseData.error === 'User with this email already exists') {
+          Alert.alert('Failed to register', 'Looks like you already have an account with this email. Please click the BACK button and select the LOG IN option, or use a different email.');
+        } else {
+          throw new Error('Failed to register');
         }
-    
+      } else {
         const data = await response.json();
         console.log('Registration successful:', data);
-      } catch (error) {
-        console.log('Error during registration:', error);
-    };
-  }
+        navigation.navigate('LogIn');
+      }
+    } catch (error) {
+      console.log('Error during registration:', error);
+      Alert.alert('Registration Failed', 'Failed to register. Please try again.');
+    }
+  };
+  
   
   return (
     <View style={styles.container}>

@@ -10,7 +10,7 @@ const Step2 = () => {
 
     const handleContinue = () => {
     navigation.navigate('Dashboard');
-    }=
+    }
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source = {logo}/>
