@@ -326,8 +326,30 @@ const styles = StyleSheet.create({
     width: 350,
     height: 110,
     fontSize: 18,
-  }
+  },
     
+    radioButtonContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: 'lightgray', // Background color when unchecked
+      borderWidth: 1,
+      borderRadius: 5,
+      padding: 10,
+      marginBottom: 10,
+    },
+    checked: {
+      backgroundColor: 'white', // Background color when checked
+      borderColor: 'green',
+    },
+    radioText: {
+      marginLeft: 10,
+    },
+
+    pillbox: {
+      width: 150,
+      height:50,
+      marginTop: 20,
+    },
   
 });
 

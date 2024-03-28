@@ -17,6 +17,7 @@
     "react": "18.2.0",
     "react-native": "0.72.5",
     "react-native-cookies": "^3.3.0",
+    "react-native-paper": "^5.12.3",
     "react-router-dom": "^6.22.1"
   },
   "devDependencies": {

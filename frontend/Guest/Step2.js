@@ -9,7 +9,7 @@ const Step2 = () => {
   const navigation = useNavigation();
 
     const handleContinue = () => {
-    navigation.navigate('Dashboard');
+    navigation.navigate('Questions1');
     }
   return (
     <View style={styles.container}>

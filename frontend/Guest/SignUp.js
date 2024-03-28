@@ -61,7 +61,7 @@ const SignUp = () => {
       } else {
         const data = await response.json();
         console.log('Registration successful:', data);
-        navigation.navigate('LogIn');
+        navigation.navigate('Step2');
       }
     } catch (error) {
       console.log('Error during registration:', error);
