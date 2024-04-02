@@ -41,27 +41,26 @@ const Questions1 = () => {
         <View style={styles.content}>
             <Text style={styles.heading}>{'Questions'}</Text>
         </View> 
-        <View style={styles.content}>
-            <Text style={styles.instr}>{'Whenever you see a list of options followed by this icon: '}</Text>
-            <Text style={styles.instr}>{'You simply have to click on the icon next to the option that best answers the question before it. '}</Text>
+        <View>
+            <Text style={styles.radioInstructions}>{'Whenever you see a list of options followed by a blue circle, you simply have to click on the blue circle icon next to the option that best answers the question before it. '}</Text>
         </View>
         <View>
-          <Text>{"1) What is your gender?"}</Text>
+          <Text style={styles.question1}>{"1) What is your gender?"}</Text>
           <View>
             <RadioButton options={options1} selectedOption={selectedOption1} onSelect={handleSelectOption1} />
-            <Text>Selected option: {selectedOption1}</Text>
+            <Text style={styles.radioText}>Selected option: {selectedOption1}</Text>
           </View>
         </View>
         <View>
-        <Text>{"2) Do you use a physical pill organiser box?"}</Text>
-          <View>
-        <RadioButton options={options2} selectedOption={selectedOption2} onSelect={handleSelectOption2} />
-        <Text>Selected option: {selectedOption2}</Text>
-        </View>
-        </View>
+        <Text style={styles.question2}>{"2) Do you use a physical pill organiser box?"}</Text>
         <View>
+        <RadioButton options={options2} selectedOption={selectedOption2} onSelect={handleSelectOption2} />
+        <View style={styles.bottom}>
+          <Text style={styles.radioText}>Selected option: {selectedOption2}</Text>
           <Image style={styles.pillbox} source = {pillbox}/>
-          <Text>{"Example of a pill organiser"}</Text>
+        </View>
+          <Text style={styles.example}>{"Example of a pill organiser"}</Text>
+        </View>
         </View>
         <View style={[styles.content,styles.nextstep,styles.nextstep2]}>
             <Text style={[styles.buttoninfo,styles.buttoninfo2]}>{'Click the red button to see the next steps: '}</Text>

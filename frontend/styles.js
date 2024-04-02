@@ -328,29 +328,108 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
     
-    radioButtonContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      backgroundColor: 'lightgray', // Background color when unchecked
-      borderWidth: 1,
-      borderRadius: 5,
-      padding: 10,
-      marginBottom: 10,
-    },
-    checked: {
-      backgroundColor: 'white', // Background color when checked
-      borderColor: 'green',
-    },
-    radioText: {
-      marginLeft: 10,
-    },
+    // radioButtonContainer: {
+    //   flexDirection: 'row',
+    //   alignItems: 'center',
+    //   backgroundColor: 'lightgray', // Background color when unchecked
+    //   borderWidth: 1,
+    //   borderRadius: 5,
+    //   padding: 10,
+    //   marginBottom: 10,
+    // },
+    // checked: {
+    //   backgroundColor: 'white', // Background color when checked
+    //   borderColor: 'green',
+    // },
+    // radioText: {
+    //   marginLeft: 10,
+    // },
 
-    pillbox: {
-      width: 150,
-      height:50,
-      marginTop: 20,
+    
+
+
+    //Questions 
+
+    radioInstructions: {
+      color: 'white',
+      fontSize: 18,
+      fontWeight: 'bold',
+      width: 338,
+      marginBottom: 20,
+      marginLeft: 20,
+      marginTop: 10,
+      backgroundColor: '#335AF8',
+      padding: 15,
     },
   
+    radioText: {
+      fontSize: 15,
+      fontWeight: 'bold', 
+      color: '#FFDE59',
+      marginLeft: 20,
+    },
+
+    question1 : {
+        backgroundColor: '#24C697',
+        width: 338,
+        height: 50,
+        padding: 10,
+        marginBottom: 10,
+        color: '#1A1F53',
+        fontWeight: 'bold',
+        fontSize: 23,
+        marginLeft: 20,
+    },
+
+    question2 : {
+      backgroundColor: '#24C697',
+      width: 338,
+      height: 80,
+      padding: 10,
+      marginTop: 20,
+      marginBottom: 10,
+      color: '#1A1F53',
+      fontWeight: 'bold',
+      fontSize: 23,
+      marginLeft: 20,
+  },
+
+  pillbox: {
+    width: 150,
+    height:50,
+    marginTop: -55,
+    marginBottom: 10,
+    marginLeft: 40,
+  },
+
+  bottom: {
+    flexDirection: 'row',
+    marginBottom: 70
+  },
+
+  example: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: 'bold',
+    width: 338,
+    marginBottom: 90,
+    marginLeft: 215,
+    marginTop: -85,
+  },
+
+  question3 : {
+    backgroundColor: '#24C697',
+    width: 358,
+    height: 105,
+    padding: 10,
+    marginBottom: 10,
+    color: '#1A1F53',
+    fontWeight: 'bold',
+    fontSize: 23,
+    marginLeft: 20,
+  },
+
+
 });
 
 

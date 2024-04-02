@@ -4,13 +4,14 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 const RadioButton = ({ options, selectedOption, onSelect }) => {
   return (
     <View>
-      {options.map((option) => (
+      {options.map((option) => (  // Map through the options array and render a TouchableOpacity for each option
         <TouchableOpacity
           key={option.value}
           style={styles.radioButton}
-          onPress={() => onSelect(option.value)}
-        >
-          <View style={[styles.radioCircle, { backgroundColor: selectedOption === option.value ? '#007AFF' : 'transparent' }]} />
+          onPress={() => onSelect(option.value)} // when pressed, call the onSelect function with the value of the option
+        > 
+        {/* // Create the circular shape of the radio button and fill it with color when selected */}
+          <View style={[styles.radioCircle, { backgroundColor: selectedOption === option.value ? '#007AFF' : 'transparent' }]} /> 
           <Text style={styles.radioText}>{option.label}</Text>
         </TouchableOpacity>
       ))}
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    marginLeft: 20,
   },
   radioCircle: {
     height: 20,
@@ -35,7 +37,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   radioText: {
-    fontSize: 16,
+    fontSize: 20,
+    fontWeight: 'bold', 
+    color: 'white',
+    width: 320,
   },
 });
 

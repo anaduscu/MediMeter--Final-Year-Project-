@@ -42,13 +42,13 @@ const Questions1 = () => {
             <Text style={styles.heading}>{'Questions'}</Text>
         </View> 
         <View>
-          <Text>{"3)How do you typically acquire your medications when your supply is running low or has run out? "}</Text>
+          <Text style={styles.question3}>{"3) How do you typically acquire your medications when your supply is low or has finished? "}</Text>
           <View>
             <RadioButton options={options1} selectedOption={selectedOption1} onSelect={handleSelectOption1} />
-            <Text>Selected option: {selectedOption1}</Text>
+            <Text style={styles.radioText}>Selected option: {selectedOption1}</Text>
           </View>
         </View>
-        <Text>{'To ensure your safety and provide additional support, we would like to gather contact information for a trusted person, family member, or caregiver. Please provide their email address and phone number.'}</Text>
+        <Text style={styles.radioInstructions}>{'To ensure your safety and provide additional support, we would like to gather contact information for a trusted person, family member, or caregiver. Please provide their email address and phone number.'}</Text>
         <Text>{"Phone Number"}</Text>
         <TextInput
           style={styles.input}
@@ -58,7 +58,6 @@ const Questions1 = () => {
           keyboardType="phone-pad"
           onBlur={dismissKeyboard} // Dismiss the keyboard when the input loses focus
         />    
-        <View style={styles.form}>
             <Text style={styles.inputTitle}>{'Email'}</Text>
             <TextInput style={styles.input}
                 value={email}
@@ -66,10 +65,6 @@ const Questions1 = () => {
                 placeholder=""
                 keyboardType="email-address"
             />
-        </View>
-        {/* <View style={[styles.content,styles.nextstep,styles.nextstep2]}>
-            <Text style={[styles.buttoninfo,styles.buttoninfo2]}>{'Click the red button to see the next steps: '}</Text>
-        </View> */}
         <View style={styles.button2}>
             <TouchableOpacity style={[styles.continuebutton,styles.button2]} onPress={handleContinue}>
                 <Text style={styles.buttonText}>{'CONTINUE'}</Text>
