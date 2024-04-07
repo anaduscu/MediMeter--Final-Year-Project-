@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   buttoninfo: {
     backgroundColor: '#335AF8',
     width: 205,
-    height: 90,
+    height: 80,
     fontSize: 18,
     padding: 20,
     marginTop: 25,
@@ -353,8 +353,9 @@ const styles = StyleSheet.create({
     radioInstructions: {
       color: 'white',
       fontSize: 18,
+      height: 160,
       fontWeight: 'bold',
-      width: 338,
+      width: 350,
       marginBottom: 20,
       marginLeft: 20,
       marginTop: 10,
@@ -427,6 +428,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 23,
     marginLeft: 20,
+  },
+
+  phone : {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
+    width: 338,
+    marginBottom: 10,
+    marginLeft: 20,
+  },
+
+  trusted : {
+    marginBottom: 70,
+    marginLeft: 20,
+    marginTop: -10,
   },
 
 

@@ -49,22 +49,26 @@ const Questions1 = () => {
           </View>
         </View>
         <Text style={styles.radioInstructions}>{'To ensure your safety and provide additional support, we would like to gather contact information for a trusted person, family member, or caregiver. Please provide their email address and phone number.'}</Text>
-        <Text>{"Phone Number"}</Text>
-        <TextInput
-          style={styles.input}
-          value={phone}
-          onChangeText={(value) => setPhone(value)}
-          placeholder="Enter your phone number"
-          keyboardType="phone-pad"
-          onBlur={dismissKeyboard} // Dismiss the keyboard when the input loses focus
-        />    
-            <Text style={styles.inputTitle}>{'Email'}</Text>
-            <TextInput style={styles.input}
-                value={email}
-                onChangeText={(em) => setEmail(em)}
-                placeholder=""
-                keyboardType="email-address"
-            />
+        <View style={styles.trusted}>
+          <Text style={styles.inputTitle}>{"Phone Number"}</Text>
+          <TextInput
+            style={styles.input}
+            value={phone}
+            onChangeText={(value) => setPhone(value)}
+            keyboardType="phone-pad"
+            // onBlur={dismissKeyboard} // Dismiss the keyboard when the input loses focus
+          />    
+              <Text style={styles.inputTitle}>{'Email'}</Text>
+              <TextInput style={styles.input}
+                  value={email}
+                  onChangeText={(em) => setEmail(em)}
+                  placeholder=""
+                  keyboardType="email-address"
+              />
+          </View>
+        <View style={[styles.content,styles.nextstep,styles.nextstep2]}>
+            <Text style={[styles.buttoninfo,styles.buttoninfo2]}>{'Click the red button to see the next steps: '}</Text>
+        </View>
         <View style={styles.button2}>
             <TouchableOpacity style={[styles.continuebutton,styles.button2]} onPress={handleContinue}>
                 <Text style={styles.buttonText}>{'CONTINUE'}</Text>
