@@ -10,9 +10,6 @@ import pillbox from '../../frontend/assets/pillbox.jpg';
 const Questions1 = () => {
   const navigation = useNavigation();
 
-    const handleContinue = () => {
-    navigation.navigate('Questions2');
-    }
     const [selectedOption1, setSelectedOption1] = useState('');
     const [selectedOption2, setSelectedOption2] = useState('');
 
@@ -34,6 +31,12 @@ const Questions1 = () => {
       setSelectedOption2(value);
     }
 
+    const handleContinue = () => {
+      navigation.navigate('Questions2');
+
+      
+
+      }
   
   return (
     <View style={styles.container}>

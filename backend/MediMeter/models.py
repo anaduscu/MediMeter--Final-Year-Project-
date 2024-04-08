@@ -5,9 +5,11 @@ class User(models.Model):
     lastname = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
+    gender = models.CharField(max_length=10, blank=True)
 
 
 class Medication(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=255)
     # picture = models.ImageField(upload_to='medication_pics/')
     dosage_instructions = models.TextField()
@@ -28,8 +30,9 @@ class RefillReminder(models.Model):
     reminder_time = models.TimeField()
 
 class Caregiver(models.Model):
-    name = models.CharField(max_length=255)
-    contact_details = models.CharField(max_length=20)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    phone_number = models.CharField(max_length=20)
+    brings_medication = models.BooleanField(default=False)
     # Add other caregiver-related fields
 
 class Notification(models.Model):
@@ -37,6 +40,7 @@ class Notification(models.Model):
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     delivered = models.BooleanField(default=False)
+    pillbox_used = models.BooleanField(default=False)
     # Add other notification-related fields
 
 class Dashboard(models.Model):
