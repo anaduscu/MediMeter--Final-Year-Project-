@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   buttoninfo: {
     backgroundColor: '#335AF8',
     width: 205,
-    height: 80,
+    height: 85,
     fontSize: 18,
     padding: 20,
     marginTop: 25,
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
 
   buttoninfo2: {
     fontSize: 16,
-    height: 80,
+    height: 85,
   },
 
   button2 : {
