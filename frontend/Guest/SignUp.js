@@ -61,6 +61,8 @@ const SignUp = () => {
       } else {
         const data = await response.json();
         console.log('Registration successful:', data);
+        currentUser = email;
+        console.log(currentUser);
         navigation.navigate('Step2');
       }
     } catch (error) {

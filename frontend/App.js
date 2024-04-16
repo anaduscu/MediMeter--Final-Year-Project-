@@ -13,6 +13,7 @@ import Questions1 from '../frontend/Guest/Questions1';
 import Questions2 from '../frontend/Guest/Questions2';
 
 const Stack = createStackNavigator();
+let currentUser = null;
 
 const App = () => {
   return (

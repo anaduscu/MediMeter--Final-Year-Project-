@@ -55,6 +55,8 @@ const LogIn = () => {
       } else {
         const data = await response.json();
         console.log('Login successful:', data);
+        currentUser = email;
+        console.log(currentUser);
         navigation.navigate('Dashboard');
       }
     } catch (error) {
