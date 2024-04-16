@@ -12,29 +12,79 @@ import { KeyboardAvoidingView } from 'react-native';
 
 const Questions1 = () => {
   const navigation = useNavigation();
+  const [selectedOption1, setSelectedOption1] = useState('');
 
-    const handleContinue = () => {
-    navigation.navigate('LogIn');
+  const [email, setEmail] = useState('');
+  const [phone_number, setPhone] = useState('');
+
+  const options1 = [
+    { label: 'I go to the pharmacy myself.', value: 'Myself' },
+    { label: 'Someone picks up my medications for me.', value: 'Someone else' },
+    { label: 'I have medications delivered to my home.', value: 'Delivery' },
+  ];
+
+  const handleSelectOption1 = (value) => {
+    setSelectedOption1(value);
+  };
+
+  const handleContinue = async () => {
+    if(selectedOption1 === ''){
+      alert('Please select an option for question 3) before continuing');
+      return;
     }
-    const [selectedOption1, setSelectedOption1] = useState('');
-
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-
-    const options1 = [
-      { label: 'I go to the pharmacy myself.', value: 'Myself' },
-      { label: 'Someone picks up my medications for me.', value: 'Someone else' },
-      { label: 'I have medications delivered to my home.', value: 'Delivery' },
-    ];
-
-    const dismissKeyboard = () => {
-        Keyboard.dismiss(); // Dismiss the keyboard
-      };
+    if(phone_number === '' || email === ''){
+      alert('Please fill in the email and phone number before continuing');
+      return;
+    }
   
-    const handleSelectOption1 = (value) => {
-      setSelectedOption1(value);
-    };
+    try {
+      // Fetch CSRF token
+      const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
+      const csrfData = await csrfResponse.json();
+      const csrfToken = csrfData.csrf_token;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        Alert.alert('Invalid Email', 'Please enter a valid email address.');
+        return;
+      }
   
+      // Make the registration request with the CSRF token
+      // Registration request
+      const response = await fetch('http://192.168.0.210:8000/MediMeter/user/caregiver/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+        },
+        body: JSON.stringify({
+            //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
+            user_email: 'ana@gmail.com',
+            email: email,
+            phone_number: phone_number,
+            brings_medication: selectedOption1,
+        })
+      });
+
+  
+      if (!response.ok) {
+        const responseData = await response.json();
+        if (responseData.error === 'User with this email already exists') {
+          Alert.alert('Failed to register', 'Looks like you already have an account with this email. Please click the BACK button and select the LOG IN option, or use a different email.');
+        } else {
+          throw new Error('Failed to register');
+        }
+      } else {
+        const data = await response.json();
+        console.log('Caregiver registration successful:', data);
+        navigation.navigate('LogIn');
+      }
+    } catch (error) {
+      console.log('Error during registration:', error);
+      Alert.alert('Registration Failed', 'Failed to register. Please try again.');
+    }
+  };
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior='position'>
       <Image style={styles.logo} source = {logo}/>
@@ -53,18 +103,17 @@ const Questions1 = () => {
           <Text style={styles.inputTitle}>{"Phone Number"}</Text>
           <TextInput
             style={styles.input}
-            value={phone}
+            value={phone_number}
             onChangeText={(value) => setPhone(value)}
             keyboardType="phone-pad"
-            // onBlur={dismissKeyboard} // Dismiss the keyboard when the input loses focus
           />    
-              <Text style={styles.inputTitle}>{'Email'}</Text>
-              <TextInput style={styles.input}
-                  value={email}
-                  onChangeText={(em) => setEmail(em)}
-                  placeholder=""
-                  keyboardType="email-address"
-              />
+          <Text style={styles.inputTitle}>{'Email'}</Text>
+          <TextInput style={styles.input}
+              value={email}
+              onChangeText={(em) => setEmail(em)}
+              placeholder=""
+              keyboardType="email-address"
+          />
           </View>
         <View style={[styles.content,styles.nextstep,styles.nextstep2]}>
             <Text style={[styles.buttoninfo,styles.buttoninfo2]}>{'Click the red button to see the next steps: '}</Text>

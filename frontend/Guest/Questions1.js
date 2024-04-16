@@ -89,6 +89,7 @@ const Questions1 = () => {
           'X-CSRFToken': csrfToken,
       },
       body: JSON.stringify({
+          //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
           email: "ana@gmail.com",
           pillbox_used: selectedOption2,
       })

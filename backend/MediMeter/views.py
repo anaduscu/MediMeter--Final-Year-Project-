@@ -1,6 +1,7 @@
 from django.middleware.csrf import get_token
 from .models import User  # Import your custom User model
 from .models import Notification
+from .models import Caregiver
 from django.http import JsonResponse
 import json
 from django.http import JsonResponse
@@ -111,6 +112,33 @@ def box_used(request):
             notification = Notification(user=user, pillbox_used=pillbox_used)
             notification.save()
             return JsonResponse({'message': 'Notification updated successfully'})
+        except ValidationError as e:
+            return JsonResponse({'error': e.message_dict}, status=400)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+def caregiver(request):
+    if request.method == 'POST':
+        # Parse JSON data from request body
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': 'Invalid JSON format'}, status=400)
+        
+        user_email = data.get('user_email', '')
+        email = data.get('email', '')
+        phone_number = data.get('phone_number', '')
+        brings_medication = data.get('brings_medication', '')
+        if brings_medication == 'Someone else':
+            brings_medication = True
+        else:
+            brings_medication = False
+        user = User.objects.get(email=user_email)
+
+        try:
+            caregiver = Caregiver(user=user, email=email, phone_number=phone_number, brings_medication=brings_medication)
+            caregiver.save()
+            return JsonResponse({'message': 'Caregiver updated successfully'})
         except ValidationError as e:
             return JsonResponse({'error': e.message_dict}, status=400)
     else:

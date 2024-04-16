@@ -31,9 +31,9 @@ class RefillReminder(models.Model):
 
 class Caregiver(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    email = models.EmailField(unique=True, default='')  # Specify the default value here
     phone_number = models.CharField(max_length=20)
     brings_medication = models.BooleanField(default=False)
-    # Add other caregiver-related fields
 
 class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
