@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from django.core import serializers
+from .models import Medication
 
 
 def get_csrf_token(request):
@@ -144,3 +145,39 @@ def caregiver(request):
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=405)
     
+def set_medication(request):
+    if request.method == 'POST':
+        # Parse JSON data from request body
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': 'Invalid JSON format'}, status=400)
+        
+        email = data.get('email', '')
+        user = User.objects.get(email=email)
+        name = data.get('name', '')
+        dosage_instructions = data.get('dosage_instructions', '')
+        frequency = data.get('frequency', '')
+
+        try:
+            medication = Medication(user=user, name=name, dosage_instructions=dosage_instructions, frequency=frequency)
+            medication.save()
+            return JsonResponse({'message': 'Medication updated successfully'})
+        except ValidationError as e:
+            return JsonResponse({'error': e.message_dict}, status=400)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+def get_medication(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            email = data.get('email', '')
+            user = User.objects.get(email=email)
+            medications = Medication.objects.filter(user=user)
+            medication_list = list(medications.values())  # Convert queryset to list of dictionaries
+            return JsonResponse({'medications': medication_list})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=405)

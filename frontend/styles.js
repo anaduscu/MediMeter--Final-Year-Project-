@@ -531,6 +531,20 @@ const styles = StyleSheet.create({
     marginLeft: -60,
   },
 
+  dosageInstructions: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    width: 350,
+    marginBottom: 20,
+    marginLeft: 20,
+    marginTop: 10,
+    backgroundColor: '#335AF8',
+    padding: 15,
+  },
+
+
+
 });
 
 

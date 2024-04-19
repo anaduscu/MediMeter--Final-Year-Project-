@@ -5,14 +5,12 @@ import styles from '../../frontend/styles.js';
 import logo from '../../frontend/assets/logo.png';
 import { useNavigation } from '@react-navigation/native';
 import TodayDate from '../../frontend/assets/TodayDate.js';
+import Schedule from '../../frontend/assets/Schedule.js';
 
 
 const Dashboard = () => {
   const navigation = useNavigation();
 
-    // const handleContinue = () => {
-    // navigation.navigate('Decision');
-    // }
   return (
     <View style={styles.container}>
       <View style={styles.dash}>
@@ -23,10 +21,7 @@ const Dashboard = () => {
             <Text style={styles.heading}>{'Dashboard'}</Text>
         </View>
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          <Text>Dashboard Component 1</Text>
-          <Text>Dashboard Component 2</Text>
-          <Text>Dashboard Component 3</Text>
-          <Text>Dashboard Component 4</Text>
+          <Schedule></Schedule>
         </ScrollView>
         <View style={styles.footer}>
             <Text style={styles.footerInstr}>Click on each button to see:</Text>
