@@ -446,6 +446,91 @@ const styles = StyleSheet.create({
   },
 
 
+  // Dashboard
+
+  dash :{
+    flexDirection: 'row',
+    marginTop: 30,
+  },
+
+  date : {
+    color: '#1A1F53',
+    fontSize: 20,
+    fontWeight: 'bold',
+    width: 150,
+    padding: 10,
+    marginLeft: 20,
+    marginRight: 100,
+    marginTop: 35,
+    marginBottom: 20,
+    backgroundColor: '#24C697',
+  },
+  
+
+  scrollViewContent: {
+    flexGrow: 1,
+    paddingBottom: 100, // Adjust this value based on the height of your footer
+  },
+
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#24c697',
+    height: 180, // Adjust the height of the footer as needed
+    alignItems: 'center',
+  },
+
+  footerButton: {
+    width: 65,
+    height: 55,
+    marginLeft: 60,
+    marginTop: 20,
+    backgroundColor: '#FF443A',
+    borderRadius: 10,
+    alignContent: 'center',
+  },
+
+  footerButtons: {
+    marginLeft: -80,
+    marginTop: -10,
+    flexDirection: 'row',
+  },
+
+  footerImage: {
+    width: 50,
+    marginLeft: 5,
+    height: 50,
+  },
+
+  footerLabels: {
+    marginLeft: 10,
+    alignContent: 'center',
+    flexDirection: 'row',
+  },
+
+  footerText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginLeft: 5,
+    marginRight: 5,
+    width: 110,
+    marginTop:15,
+  },
+
+  footerInstr: {
+    color: 'white',
+    backgroundColor: '#335AF8',
+    padding: 8,
+    fontSize: 20,
+    fontWeight: 'bold',
+    width: 280,
+    marginTop: 10,
+    marginLeft: -60,
+  },
+
 });
 
 
