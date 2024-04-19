@@ -543,7 +543,92 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 
+  // Schedule 
 
+  sched: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
+    marginTop: 10,
+    marginBottom: 5,
+  },
+
+  medicationItem: {
+    backgroundColor: '#FFDE59',
+    width: 350,
+    height: 30,
+    marginTop: 15,
+    marginBottom: 5,
+    marginLeft: 20,
+    color: 'white',
+    fontWeight: 'bold',
+    flexDirection: 'row',
+  },
+
+  medicationName: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#1A1F53',
+    alignContent: 'center',
+    marginLeft: 10,
+    marginTop: 5,
+  },
+
+  dosageInstructions: {
+    fontSize: 15,
+    color: '#1A1F53',
+    fontWeight: 'bold',
+    alignContent: 'center',
+    marginLeft: 5,
+    marginTop: 5,
+  },
+
+  timeofday: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    marginTop: 10,
+    marginLeft: 20,
+    flexDirection: 'row',
+    backgroundColor: '#335AF8',
+    padding: 3,
+  },
+
+  
+  todimg: {
+    flexDirection: 'row',
+  },
+
+  sun: {
+    width: 30,
+    height: 30,
+    marginTop: 10,
+    marginLeft: 5,
+  },
+
+  suncloud: {
+    width: 35,
+    height: 30,
+    marginTop: 10,
+    marginLeft: 5,
+  },
+
+  moon: {
+    width: 25,
+    height: 25,
+    marginTop: 15,
+    marginLeft: 5,
+  },
+
+  checkbox: {
+    width: 32,
+    height: 32,
+    borderRadius: 5,
+    borderWidth: 4,
+    borderColor: '#24C697',
+    marginLeft: -1,
+    marginTop: -1,
+    },
 
 });
 

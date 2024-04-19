@@ -19,6 +19,8 @@ const Dashboard = () => {
       </View>
         <View style={styles.content}>
             <Text style={styles.heading}>{'Dashboard'}</Text>
+            <Text style={styles.sched}>Today's schedule</Text>
+
         </View>
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <Schedule></Schedule>
