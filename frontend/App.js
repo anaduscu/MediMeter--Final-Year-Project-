@@ -12,6 +12,7 @@ import Dashboard from '../frontend/User/Dashboard';
 import Questions1 from '../frontend/Guest/Questions1';
 import Questions2 from '../frontend/Guest/Questions2';
 import MedList from './User/MedList.js';
+import AddMedication from './User/AddMedication.js';
 
 const Stack = createStackNavigator();
 let currentUser = null;
@@ -20,7 +21,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LandingPage"
+        initialRouteName="MedList"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="LandingPage" component={LandingPage} />
@@ -33,6 +34,7 @@ const App = () => {
         <Stack.Screen name="Questions1" component={Questions1} />
         <Stack.Screen name="Questions2" component={Questions2} />
         <Stack.Screen name="MedList" component={MedList} />
+        <Stack.Screen name="AddMedication" component={AddMedication} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet , TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import logo from '../../frontend/assets/logo.png';
 import styles from '../../frontend/styles.js';
 
 const MedList = () => {
+
+    const navigation = useNavigation();
   const [medications, setMedications] = useState([]);
 
   const getMedications = async () => {
@@ -50,14 +53,8 @@ const MedList = () => {
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
-      <Text style={styles.heading}>Your Medications</Text>
+      <Text style={styles.heading}>{"Your Medications"}</Text>
       <View style={styles.table}>
-        <View style={styles.tableRow}>
-          <Text style={styles.tableHeader}>Medication</Text>
-          <Text style={styles.tableHeader}>Grams</Text>
-          <Text style={styles.tableHeader}>Frequency</Text>
-          <Text style={styles.tableHeader}>Dietary Requirements</Text>
-        </View>
         {medications.map((medication, index) => (
           <View style={styles.tableRow} key={index}>
             <Text style={styles.tableCell}>{medication.name}</Text>
@@ -67,6 +64,14 @@ const MedList = () => {
           </View>
         ))}
       </View>
+      
+      <View>
+        <Text>{"Click the + sign to add more medications to your list"}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('AddMedication')}> 
+          <Text>{"+"}</Text>
+        </TouchableOpacity>
+        </View>
+
     </View>
   );
 };
