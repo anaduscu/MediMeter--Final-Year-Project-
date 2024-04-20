@@ -630,6 +630,69 @@ const styles = StyleSheet.create({
     marginTop: -1,
     },
 
+    //Add medication
+
+    addmedication: {
+      flexGrow: 1,
+    },
+
+    info3: {
+      backgroundColor: '#24C697',
+      width: 350,
+      height: 90,
+      padding: 10,
+      marginTop: 25,
+      marginBottom: 20,
+      color: '#1A1F53',
+      fontWeight: 'bold',
+      fontSize: 18,
+      marginLeft: 20,
+    },
+
+    info4: {
+      backgroundColor: '#335AF8',
+      width: 230,
+      height: 130,
+      padding: 10,
+      marginTop: 25,
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 15,
+      marginLeft: 20,
+    },
+
+    selectImage: {
+      width: 100,
+      height: 70,
+      color: '#1A1F53',
+      marginTop: 60,
+      marginLeft: 20,
+      borderRadius: 2,
+      borderWidth: 5,
+      borderColor: '#24C697',
+      textAlign: 'center',
+      padding: 10,
+      fontWeight: 'bold',
+      backgroundColor: '#FFDE59',
+    },
+
+    input2 : {
+      marginLeft: 20,
+    },
+
+    upload: {
+      flexDirection: 'row',
+    },
+
+    title: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: 'white',
+      marginTop: 10,
+      marginBottom: 10,
+      marginLeft: 20,
+    },
+
 });
 
 
