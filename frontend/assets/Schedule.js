@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, Text, View , Image, TouchableOpacity} from 'react-native';
+import CheckBox from '../../frontend/assets/CheckBox.js';
 import styles from '../../frontend/styles.js';
 
 const Schedule = () => {
@@ -40,7 +41,7 @@ const Schedule = () => {
   useEffect(() => {
     getMedications();
     // Poll for new medications every 20 seconds
-    const intervalId = setInterval(getMedications, 20000);
+    const intervalId = setInterval(getMedications, 5000);
 
     // Clean up interval on component unmount
     return () => clearInterval(intervalId);
@@ -62,19 +63,7 @@ const Schedule = () => {
         evening.push(medication);
     }
     });
-
-    // Function to handle checkbox state change
-    const handleCheckboxChange = () => {
-        setMedications(prevState => {
-        const updatedMedications = [...prevState];
-        updatedMedications[index].checked = !updatedMedications[index].checked;
-        return updatedMedications;
-        });
-    };
-      
-      
     
-
 
     if (medications.length === 0) {
         return (
@@ -91,12 +80,8 @@ const Schedule = () => {
                             <Image source={require('../../frontend/assets/sun.png')} style={styles.sun}/>
                         </View>
                         {morning.map((medication, index) => (
-                            <View key={index} style={styles.medicationItem}>
-                                <TouchableOpacity onPress={() => handleCheckboxChange()}>
-                                    <View style={[styles.checkbox, { backgroundColor: medication.checked ? '#007AFF' : '#FFF' }]} />
-                                </TouchableOpacity>
-                                <Text style={styles.medicationName}>{medication.name}</Text>
-                                <Text style={styles.dosageInstructions}>{medication.dosage_instructions}</Text>
+                            <View key={index}>
+                                <CheckBox name={medication.name} grams={medication.grams} frequency={medication.frequency} dietaryRequirements={medication.dietary_requirements} />
                             </View>
                         ))}
                     </View>
@@ -106,12 +91,8 @@ const Schedule = () => {
                             <Image source={require('../../frontend/assets/suncloud.png')} style={styles.suncloud}/>
                         </View>
                         {afternoon.map((medication, index) => (
-                            <View key={index} style={styles.medicationItem}>
-                                <TouchableOpacity onPress={() => handleCheckboxChange(index)}>
-                                    <View style={[styles.checkbox, { backgroundColor: medication.checked ? '#007AFF' : '#FFF' }]} />
-                                </TouchableOpacity>
-                                <Text style={styles.medicationName}>{medication.name}</Text>
-                                <Text style={styles.dosageInstructions}>{medication.dosage_instructions}</Text>
+                            <View key={index}>
+                                <CheckBox name={medication.name} grams={medication.grams} frequency={medication.frequency} dietaryRequirements={medication.dietary_requirements} />
                             </View>
                         ))}
                     </View>
@@ -121,12 +102,8 @@ const Schedule = () => {
                             <Image source={require('../../frontend/assets/moon.png')} style={styles.moon}/>
                         </View>
                         {evening.map((medication, index) => (
-                            <View key={index} style={styles.medicationItem}>
-                                <TouchableOpacity onPress={() => handleCheckboxChange(index)}>
-                                    <View style={[styles.checkbox, { backgroundColor: medication.checked ? '#007AFF' : '#FFF' }]} />
-                                </TouchableOpacity>
-                                <Text style={styles.medicationName}>{medication.name}</Text>
-                                <Text style={styles.dosageInstructions}>{medication.dosage_instructions}</Text>
+                            <View key={index}>
+                                <CheckBox name={medication.name} grams={medication.grams} frequency={medication.frequency} dietaryRequirements={medication.dietary_requirements} />
                             </View>
                         ))}
                     </View>

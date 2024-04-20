@@ -33,7 +33,7 @@ const Welcome1 = () => {
                 <Text style={styles.buttonText}>{'CONTINUE'}</Text>
             </TouchableOpacity>
         </View>
-        <View style={styles.footer}>
+        <View style={styles.footer1}>
             <Text style={styles.back}>{'If you think you have made a mistake, and you\nalready have an account,\nplease click here to return\nto the previous page: '}</Text>
             <Image  style={[styles.leftdown, styles.arrow2]} source = {leftdown}/>
           <View style={styles.backbutton}>
@@ -49,3 +49,5 @@ const Welcome1 = () => {
 
 
 export default Welcome1;
+
+

@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
 
-  footer : {
+  footer1 : {
     backgroundColor: '#1A1F53',
     justifyContent: 'center',
     marginLeft: -20,
