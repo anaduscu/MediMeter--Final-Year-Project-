@@ -185,6 +185,31 @@ def get_medication(request):
             return JsonResponse({'error': str(e)}, status=400)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+def get_personal_info(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            print('Request data:', data)
+            email = data.get('email', '')
+            user = User.objects.get(email=email)
+            caregiver = Caregiver.objects.filter(user=user)
+            caregiver_list = list(caregiver.values())
+            user_info = {
+                'email': user.email,  # Simplified response with only email
+                'firstname': user.firstname,
+                'lastname': user.lastname,
+                'caregiver': caregiver_list[0]['email'],
+                'phone_number': caregiver_list[0]['phone_number'],
+            }
+            
+            return JsonResponse({'personalInfo': user_info})
+    
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
+
     
 def delete_medication(request, medication_id):
     try:
