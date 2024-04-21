@@ -650,12 +650,12 @@ const styles = StyleSheet.create({
     },
 
     info4: {
-      backgroundColor: '#335AF8',
+      backgroundColor: '#24C697',
       width: 230,
       height: 130,
       padding: 10,
       marginTop: 25,
-      color: 'white',
+      color: '#1A1F53',
       fontWeight: 'bold',
       fontSize: 15,
       marginLeft: 20,
@@ -693,6 +693,59 @@ const styles = StyleSheet.create({
       marginLeft: 20,
     },
 
+    add: {
+      width: 120,
+      height: 60,
+      marginLeft: 10,
+      marginTop: 35,
+      padding: 10,
+      backgroundColor: '#FF443A',
+      borderRadius: 10, // Set the border radius to make it rounded
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+    },
+
+    tabletcount: {
+      width: 150,
+      height: 130,
+      marginLeft: 20,
+      marginBottom: 10,
+    },
+
+    note: {
+      color: '#FFDE59',
+      fontSize: 15,
+      fontWeight: 'bold',
+      width: 130,
+      marginLeft: 20,
+    },
+
+    tabletnumber : {
+      width: 60,
+      height: 40,
+      marginLeft: 20,
+      marginTop: -45,
+    },
+
+    currentstock: {
+      width: 60,
+      height: 40,
+      marginLeft: 20,
+      marginBottom: 10,
+    },
+
+    currenttablets: {
+        color: '#FFDE59',
+        fontSize: 15,
+        fontWeight: 'bold',
+        width: 340,
+        marginLeft: 20,
+        marginBottom: 10,
+      },
+  
+    
+    
 });
 
 

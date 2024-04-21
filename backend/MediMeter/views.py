@@ -156,11 +156,15 @@ def set_medication(request):
         email = data.get('email', '')
         user = User.objects.get(email=email)
         name = data.get('name', '')
+        picture = data.get('picture', '')
         dosage_instructions = data.get('dosage_instructions', '')
         frequency = data.get('frequency', '')
+        dietary_restrictions = data.get('dietary_restrictions', '')
+        tabletcount = data.get('tabletcount', '')
+        current_stock = data.get('current_stock', '')
 
         try:
-            medication = Medication(user=user, name=name, dosage_instructions=dosage_instructions, frequency=frequency)
+            medication = Medication(user=user, name=name, picture=picture, dosage_instructions=dosage_instructions, frequency=frequency, dietary_restrictions=dietary_restrictions, tabletcount=tabletcount, current_stock=current_stock)
             medication.save()
             return JsonResponse({'message': 'Medication updated successfully'})
         except ValidationError as e:

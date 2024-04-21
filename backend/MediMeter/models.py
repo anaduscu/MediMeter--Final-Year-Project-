@@ -15,6 +15,10 @@ class Medication(models.Model):
     dosage_instructions = models.TextField()
     frequency = models.CharField(max_length=20)
     dietary_restrictions = models.TextField(max_length=20, default='')
+    tabletcount = models.IntegerField(default=0)
+    current_stock = models.IntegerField(default=0)
+    refill_date = models.DateField(default='2025-01-01')
+    missed_doses = models.IntegerField(default=0)
     # Add other medication-related fields
 
 class DoseLog(models.Model):

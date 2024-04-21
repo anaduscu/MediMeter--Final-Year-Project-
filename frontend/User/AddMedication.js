@@ -4,6 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import styles from '../styles.js';
 import logo from '../assets/logo.png';
 import RadioButton from '../assets/RadioButton.js';
+import tabletcount from '../assets/tabletcount.png';
 
 const AddMedication = () => {
   const [name, setName] = useState('');
@@ -11,6 +12,9 @@ const AddMedication = () => {
   const [frequency, setFrequency] = useState('');
   const [dietaryRestrictions, setDietaryRestrictions] = useState('');
   const [image, setImage] = useState(null);
+  const [tabletCount, setTabletCount] = useState('');
+  const [currentStock, setCurrentStock] = useState('');
+  const [missedDose, setMissedDose] = useState('');
 
   const options1 = [
     { label: '100mg', value: '100mg' },
@@ -74,12 +78,31 @@ const AddMedication = () => {
         </View>      
         <Text style={styles.info3}>{'Here you can add medications to your list of prescriptions. Please provide the necessary details below: '}</Text>
         <ScrollView contentContainerStyle={styles.addmedication}>
-            <Text style={styles.title}>{'Name'}</Text>
+            <Text style={styles.title}>{'Medication Name'}</Text>
             <TextInput style={[styles.input,styles.input2]}
                 placeholder=""
                 value={name}
                 onChangeText={text => setName(text)}
             />
+            <Text style={styles.title}>{'Tablet count per box'}</Text>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.note}>{'Note: \nthis is usually written on the box like so →'}</Text>
+                    <Image source={tabletcount} style={styles.tabletcount} />
+                </View>
+                <TextInput style={[styles.input,styles.tabletnumber]}
+                    placeholder=""
+                    keyboardType="numeric"
+                    value={tabletCount}
+                    onChangeText={text => setTabletCount(text)}
+                />
+            <Text style={styles.title}>{'Current Stock'}</Text>
+                <Text style={styles.currenttablets}>{'How many tablets of this type do you have right now? Please count them and type the number below.'}</Text>
+                <TextInput style={[styles.input,styles.currentstock]}
+                    placeholder=""
+                    keyboardType="numeric"
+                    value={currentStock}
+                    onChangeText={text => setCurrentStock(text)}
+                />
             <Text style={styles.title}>{'Dosage'}</Text>
                 <RadioButton options={options1} selectedOption={dosageInstructions} onSelect={setDosageInstructions} />
             <Text style={styles.radioText}>Selected option: {dosageInstructions}</Text>
@@ -99,7 +122,7 @@ const AddMedication = () => {
             </ScrollView>
             <View style={[styles.content, styles.nextstep]}>
                 <Text style={[styles.buttoninfo, styles.bluebox]}>{'Click the red button when you have finished typing in all details:'}</Text>
-                    <TouchableOpacity style={[styles.continuebutton, styles.signupbutton]}>
+                    <TouchableOpacity style={styles.add}>
                     <Text style={styles.buttonText}>{'ADD MEDICATION'}</Text>
                 </TouchableOpacity>
             </View>
