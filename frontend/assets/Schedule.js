@@ -41,7 +41,7 @@ const Schedule = () => {
   useEffect(() => {
     getMedications();
     // Poll for new medications every 20 seconds
-    const intervalId = setInterval(getMedications, 5000);
+    const intervalId = setInterval(getMedications,100000);
 
     // Clean up interval on component unmount
     return () => clearInterval(intervalId);

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class User(models.Model):
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
@@ -11,7 +12,7 @@ class User(models.Model):
 class Medication(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=255)
-    picture = models.ImageField(upload_to='medication_pics/', default='../../frontend/assets/default.png')
+    picture = models.ImageField(upload_to='medication_pics/', default='default.png')
     dosage_instructions = models.TextField()
     frequency = models.CharField(max_length=20)
     dietary_restrictions = models.TextField(max_length=20, default='')

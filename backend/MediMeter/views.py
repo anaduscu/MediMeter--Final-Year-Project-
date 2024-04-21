@@ -162,7 +162,7 @@ def set_medication(request):
         dietary_restrictions = data.get('dietary_restrictions', '')
         tabletcount = data.get('tabletcount', '')
         current_stock = data.get('current_stock', '')
-
+        
         try:
             medication = Medication(user=user, name=name, picture=picture, dosage_instructions=dosage_instructions, frequency=frequency, dietary_restrictions=dietary_restrictions, tabletcount=tabletcount, current_stock=current_stock)
             medication.save()

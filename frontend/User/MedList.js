@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet , TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import logo from '../../frontend/assets/logo.png';
 import styles from '../../frontend/styles.js';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const MedList = () => {
 
@@ -54,22 +55,27 @@ const MedList = () => {
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <Text style={styles.heading}>{"Your Medications"}</Text>
-      <View style={styles.table}>
+      <ScrollView style={styles.table}>
         {medications.map((medication, index) => (
           <View style={styles.tableRow} key={index}>
             <Text style={styles.tableCell}>{medication.name}</Text>
             <Text style={styles.tableCell}>{medication.grams}</Text>
             <Text style={styles.tableCell}>{medication.frequency}</Text>
             <Text style={styles.tableCell}>{medication.dietaryRequirements}</Text>
+            <Text style={styles.tableCell}>{medication.tabletcount}</Text>
+            <Text style={styles.tableCell}>{medication.current_stock}</Text>
+            <Text style={styles.tableCell}>{medication.missed_doses}</Text>
+            {medication.picture && <Image source={{ uri: medication.picture }} style={{ width: 200, height: 200 }} />}
           </View>
         ))}
-      </View>
+      </ScrollView>
       
       <View>
-        <Text>{"Click the + sign to add more medications to your list"}</Text>
         <TouchableOpacity onPress={() => navigation.navigate('AddMedication')}> 
-          <Text>{"+"}</Text>
+          <Text style={styles.button2}>{"+"}</Text>
         </TouchableOpacity>
+        <Text>{"Click the + sign to add more medications to your list"}</Text>
+        
         </View>
 
     </View>

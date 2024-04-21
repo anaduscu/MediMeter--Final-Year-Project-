@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import register_user, get_csrf_token , login_user, set_gender, box_used, caregiver, get_medication, set_medication
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('user/register/', register_user, name='register_user'),
@@ -10,4 +12,4 @@ urlpatterns = [
     path('medication/set_medication/', set_medication, name='set_medication'),
     path('user/login/', login_user, name='login_user'),
     path('csrf_token/', get_csrf_token, name='get_csrf_token'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
