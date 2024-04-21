@@ -70,6 +70,7 @@ const Schedule = () => {
           <View style={styles.items}>
             <Text style={[styles.emptyInventory, {height:250}]}>{"Your schedule is empty because there are no medications in your inventory. You can add some by selecting the middle option below, which will take you to your list of medications:"}</Text>
           </View>
+          
         );
     } else {
             return (

@@ -121,6 +121,25 @@ const handleDelete = async (medicationId) => {
                 </TouchableOpacity>
             </View>
         </View>
+        <View style={styles.footer}>
+            <Text style={styles.footerInstr}>Click on each button to see:</Text>
+            <View style={styles.footerLabels}>
+                  <Text style={styles.footerText}>Your personal information</Text>
+                  <Text style={styles.footerText}>Your schedule </Text>
+                  <Text style={styles.footerText}>How the app works</Text>
+            </View>
+            <View style={styles.footerButtons}>
+              <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('PersonalInfo')}>
+                  <Image source={require('../../frontend/assets/personal.png')} style={styles.footerImage}></Image>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Dashboard')}>
+                <Image source={require('../../frontend/assets/dash.png')} style={styles.footerImage}></Image>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('AppInfo')}>
+                  <Image source={require('../../frontend/assets/info.png')} style={styles.footerImage}></Image>
+              </TouchableOpacity>
+            </View>
+          </View> 
         </View>
     );
     } else {
@@ -154,6 +173,25 @@ const handleDelete = async (medicationId) => {
                 </TouchableOpacity>
             </View>
         </ScrollView>
+        <View style={styles.footer}>
+            <Text style={styles.footerInstr}>Click on each button to see:</Text>
+            <View style={styles.footerLabels}>
+                  <Text style={styles.footerText}>Your personal information</Text>
+                  <Text style={styles.footerText}>Your schedule </Text>
+                  <Text style={styles.footerText}>How the app works</Text>
+            </View>
+            <View style={styles.footerButtons}>
+              <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('PersonalInfo')}>
+                  <Image source={require('../../frontend/assets/personal.png')} style={styles.footerImage}></Image>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Dashboard')}>
+                <Image source={require('../../frontend/assets/dash.png')} style={styles.footerImage}></Image>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('AppInfo')}>
+                  <Image source={require('../../frontend/assets/info.png')} style={styles.footerImage}></Image>
+              </TouchableOpacity>
+            </View>
+          </View> 
         </View>
     );
 }
