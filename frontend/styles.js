@@ -743,9 +743,83 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginBottom: 10,
       },
+
+      med : {
+        flexDirection: 'row',
+        marginTop: 15,
+        marginBottom: 15,
+        marginLeft: 20,
+      },
   
+    tableRow: {
+      color: '#1A1F53',
+      fontSize: 15,
+      fontWeight: 'bold',
+      width: 210,
+      borderColor: 'white',
+      borderWidth: 2,
+    },
     
-    
+    celltitle: {
+      backgroundColor: '#24C697',
+      color: '#1A1F53',
+      fontSize: 15,
+      fontWeight: 'bold',
+      width: 206,
+      height: 30,
+      padding: 5,
+      borderTopColor: 'white',
+      borderTopWidth: 2,
+      borderRightColor: 'white',
+      borderRightWidth: 2,
+    },
+
+    tableCell: {
+      color: 'white',
+      fontSize: 15,
+      fontWeight: 'bold',
+      width: 300,
+      height: 30,
+      padding: 5,
+    },  
+
+    deletemed : {
+      width: 35,
+      padding: 15,
+      height: 40,
+      marginLeft: -50,
+      marginTop: 90,
+      backgroundColor: '#FF443A',
+      borderRadius: 10, // Set the border radius to make it rounded
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    addmed : {
+      width: 35,
+      padding: 15,
+      height: 40,
+      marginLeft: 50,
+      marginTop: 40,
+      backgroundColor: '#FF443A',
+      borderRadius: 10, // Set the border radius to make it rounded
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    emptyInventory: {
+      backgroundColor: '#FFDE59',
+      width: 330,
+      height: 200,
+      padding: 10,
+      marginTop: 15,
+      marginBottom: 250,
+      marginLeft: 20,
+      color: '#1A1F53',
+      fontSize: 24,
+      fontWeight: 'bold',
+    }
+
 });
 
 

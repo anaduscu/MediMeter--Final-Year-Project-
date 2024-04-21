@@ -68,7 +68,7 @@ const Schedule = () => {
     if (medications.length === 0) {
         return (
           <View style={styles.items}>
-            <Text style={styles.medicationItem}>Your schedule is empty because there are no medications in your inventory. You can add some by selecting the middle option below, which will take you to your list of medications: '</Text>
+            <Text style={styles.emptyInventory}>{"Your schedule is empty because there are no medications in your inventory. You can add some by selecting the middle option below, which will take you to your list of medications:"}</Text>
           </View>
         );
     } else {

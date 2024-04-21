@@ -74,7 +74,7 @@ const AddMedication = () => {
   ];
 
   const options2 = [
-    { label: 'Empty Stomach', value: 'Empty Stomach' },
+    { label: 'On an empty Stomach', value: 'On an empty Stomach' },
     { label: 'Before Food', value: 'Before Food'},
     { label: 'With Food', value: 'With Food'},
     { label: 'After Food', value: 'After Food'},

@@ -162,7 +162,7 @@ def set_medication(request):
         dietary_restrictions = data.get('dietary_restrictions', '')
         tabletcount = data.get('tabletcount', '')
         current_stock = data.get('current_stock', '')
-        
+
         try:
             medication = Medication(user=user, name=name, picture=picture, dosage_instructions=dosage_instructions, frequency=frequency, dietary_restrictions=dietary_restrictions, tabletcount=tabletcount, current_stock=current_stock)
             medication.save()
@@ -185,3 +185,13 @@ def get_medication(request):
             return JsonResponse({'error': str(e)}, status=400)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+def delete_medication(request, medication_id):
+    try:
+        medication = Medication.objects.get(pk=medication_id)
+        medication.delete()
+        return JsonResponse({'message': 'Medication deleted successfully'})
+    except Medication.DoesNotExist:
+        return JsonResponse({'error': 'Medication does not exist'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
