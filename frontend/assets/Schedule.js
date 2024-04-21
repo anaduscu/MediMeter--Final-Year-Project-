@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, Text, View , Image, TouchableOpacity} from 'react-native';
 import CheckBox from '../../frontend/assets/CheckBox.js';
 import styles from '../../frontend/styles.js';
+import { get } from 'lodash';
 
 const Schedule = () => {
   const [medications, setMedications] = useState([]);
@@ -41,7 +42,7 @@ const Schedule = () => {
   useEffect(() => {
     getMedications();
     // Poll for new medications every 20 seconds
-    const intervalId = setInterval(getMedications,100000);
+    const intervalId = setInterval(getMedications,10000);
 
     // Clean up interval on component unmount
     return () => clearInterval(intervalId);
@@ -52,23 +53,22 @@ const Schedule = () => {
     const evening = [];
 
     medications.forEach(medication => {
-    if (medication.frequency === '1') {
+    if (medication.frequency === 'Once a day') {
         morning.push(medication);
-    } else if (medication.frequency === '2') {
+    } else if (medication.frequency === 'Twice a day') {
         morning.push(medication);
         afternoon.push(medication);
-    } else if (medication.frequency === '3') {
+    } else if (medication.frequency === 'Three times a day') {
         morning.push(medication);
         afternoon.push(medication);
         evening.push(medication);
     }
     });
     
-
     if (medications.length === 0) {
         return (
           <View style={styles.items}>
-            <Text style={styles.emptyInventory}>{"Your schedule is empty because there are no medications in your inventory. You can add some by selecting the middle option below, which will take you to your list of medications:"}</Text>
+            <Text style={[styles.emptyInventory, {height:250}]}>{"Your schedule is empty because there are no medications in your inventory. You can add some by selecting the middle option below, which will take you to your list of medications:"}</Text>
           </View>
         );
     } else {
@@ -81,7 +81,7 @@ const Schedule = () => {
                         </View>
                         {morning.map((medication, index) => (
                             <View key={index}>
-                                <CheckBox name={medication.name} grams={medication.grams} frequency={medication.frequency} dietaryRequirements={medication.dietary_requirements} />
+                                <CheckBox name={medication.name} grams={medication.dosage_instructions} frequency={medication.frequency} dietaryRequirements={medication.dietary_restrictions} />
                             </View>
                         ))}
                     </View>
@@ -92,7 +92,7 @@ const Schedule = () => {
                         </View>
                         {afternoon.map((medication, index) => (
                             <View key={index}>
-                                <CheckBox name={medication.name} grams={medication.grams} frequency={medication.frequency} dietaryRequirements={medication.dietary_requirements} />
+                                <CheckBox name={medication.name} grams={medication.dosage_instructions} frequency={medication.frequency} dietaryRequirements={medication.dietary_restrictions} />
                             </View>
                         ))}
                     </View>
@@ -103,7 +103,7 @@ const Schedule = () => {
                         </View>
                         {evening.map((medication, index) => (
                             <View key={index}>
-                                <CheckBox name={medication.name} grams={medication.grams} frequency={medication.frequency} dietaryRequirements={medication.dietary_requirements} />
+                                <CheckBox name={medication.name} grams={medication.dosage_instructions} frequency={medication.frequency} dietaryRequirements={medication.dietary_restrictions} />
                             </View>
                         ))}
                     </View>

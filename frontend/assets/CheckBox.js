@@ -19,10 +19,10 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements }) => {
     return (
         <View style={styles.medicationItem}>
             <TouchableOpacity onPress={handleCheckBoxChange}>
-                <View style={[styles.checkbox, { backgroundColor: isChecked ? 'green' : '#FFF' }]} />
+                <View style={[styles.checkbox, { backgroundColor: isChecked ? 'blue' : '#FFF' }]} />
             </TouchableOpacity>
             <Text style={styles.medicationName}>
-                {name} {grams} grams ({frequency} times a day) {dietaryRequirements}
+                {name} {grams} (1 pill: {dietaryRequirements})
             </Text>
         </View>
     );

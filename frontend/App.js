@@ -15,13 +15,12 @@ import MedList from './User/MedList.js';
 import AddMedication from './User/AddMedication.js';
 
 const Stack = createStackNavigator();
-let currentUser = null;
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MedList"
+        initialRouteName="LandingPage"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="LandingPage" component={LandingPage} />
