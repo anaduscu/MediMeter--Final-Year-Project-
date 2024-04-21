@@ -199,6 +199,7 @@ def get_personal_info(request):
                 'email': user.email,  # Simplified response with only email
                 'firstname': user.firstname,
                 'lastname': user.lastname,
+                'gender': user.gender,
                 'caregiver': caregiver_list[0]['email'],
                 'phone_number': caregiver_list[0]['phone_number'],
             }
