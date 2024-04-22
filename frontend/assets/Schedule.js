@@ -91,6 +91,7 @@ const Schedule = () => {
     }
     });
     
+    
     if (medications.length === 0) {
         return (
           <View style={styles.items}>
