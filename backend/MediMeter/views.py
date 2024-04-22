@@ -218,3 +218,25 @@ def delete_medication(request, medication_id):
         return JsonResponse({'error': 'Medication does not exist'}, status=404)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+def increase_stock (request, medication_id):
+    try:
+        medication = Medication.objects.get(pk=medication_id)
+        medication.current_stock += medication.tabletcount
+        medication.save()
+        return JsonResponse({'message': 'Stock updated successfully'})
+    except Medication.DoesNotExist:
+        return JsonResponse({'error': 'Medication does not exist'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+def decrease_stock (request, medication_id):
+    try:
+        medication = Medication.objects.get(pk=medication_id)
+        medication.current_stock -= 1
+        medication.save()
+        return JsonResponse({'message': 'Stock updated successfully'})
+    except Medication.DoesNotExist:
+        return JsonResponse({'error': 'Medication does not exist'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

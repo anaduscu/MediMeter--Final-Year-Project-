@@ -5,6 +5,7 @@ import styles from '../../frontend/styles.js';
 import logo from '../../frontend/assets/logo.png';
 import dash from '../../frontend/assets/dash.png';
 import { use } from 'ast-types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PersonalInfo = () => {
     const [personalInfo, setPersonalInfo] = useState('');
@@ -12,6 +13,8 @@ const PersonalInfo = () => {
     const navigation = useNavigation();
 
     const fetchPersonalInfo = async () => {
+        const userEmailString = await AsyncStorage.getItem('userEmail');
+        console.log(userEmailString);
         try {
             // Fetch CSRF token
             const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
@@ -28,7 +31,7 @@ const PersonalInfo = () => {
             },
                 body: JSON.stringify({
                     // Hardcoded email for now
-                    email: 'ana@gmail.com'
+                    email: userEmailString,
                 })
             });
             

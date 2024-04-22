@@ -6,6 +6,9 @@ import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
+import { enableExperimentalFragmentVariables } from 'graphql-tag';
+import {setUserEmail} from '../../frontend/Storage.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +21,6 @@ const LogIn = () => {
       Alert.alert('Incomplete Form', 'Please fill in all text boxes before continuing.');
       return;
     }
-
     try {
       // Fetch CSRF token
       const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
@@ -40,7 +42,7 @@ const LogIn = () => {
             'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({
-            email: email, 
+            email: email,
             password: password,
         })
       });
@@ -55,8 +57,8 @@ const LogIn = () => {
       } else {
         const data = await response.json();
         console.log('Login successful:', data);
-        currentUser = email;
-        console.log(currentUser);
+        setUserEmail(email);
+        const userEmailString = await AsyncStorage.getItem('userEmail');
         navigation.navigate('Dashboard');
       }
     } catch (error) {
@@ -106,5 +108,3 @@ const LogIn = () => {
 }
 
 export default LogIn;
-
-

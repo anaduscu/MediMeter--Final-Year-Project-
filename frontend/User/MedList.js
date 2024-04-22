@@ -7,6 +7,9 @@ import styles from '../../frontend/styles.js';
 import deletemed from '../../frontend/assets/deletemed.png';
 import addmed from '../../frontend/assets/addmed.png';
 import { ScrollView } from 'react-native-gesture-handler';
+import {getUserEmail} from '../../frontend/Storage.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const MedList = () => {
 
@@ -40,6 +43,31 @@ const handleDelete = async (medicationId) => {
     }
   }
 
+  const handleIncreaseStock = async (medicationId) => {    
+    try {
+      const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
+      const csrfData = await csrfResponse.json();
+      const csrfToken = csrfData.csrf_token;
+  
+      const response = await fetch(`http://192.168.0.210:8000/MediMeter/medication/increase_stock/${medicationId}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to increase stock');
+      } else {
+        // Handle successful deletion, e.g., update medication list
+        getMedications();
+      }
+    } catch (error) {
+      console.log('Error increasing stock:', error);
+    }
+  }
+
 
 // Function to handle delete request with confirmation
     const handleDeleteWithConfirmation = (medicationId) => {
@@ -60,9 +88,29 @@ const handleDelete = async (medicationId) => {
     );
     };
 
+    const handleIncreaseStockWithConfirmation = (medicationId) => {
+        Alert.alert(
+            'Confirm Restock',
+            'Did you get a pharmacy refill for this medication?',
+            [
+            {
+                text: 'No',
+                style: 'no',
+            },
+            {
+                text: 'Yes',
+                onPress: () => handleIncreaseStock(medicationId),
+            },
+            ],
+            { cancelable: false }
+        );
+    };
+
   
 
   const getMedications = async () => {
+    const userEmailString = await AsyncStorage.getItem('userEmail');
+
     try {
       // Fetch CSRF token
       const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
@@ -78,7 +126,7 @@ const handleDelete = async (medicationId) => {
         },
         body: JSON.stringify({
           //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
-          email: "ana@gmail.com",
+          email: userEmailString,
         })
       });
 
@@ -161,6 +209,9 @@ const handleDelete = async (medicationId) => {
                     <Text style={styles.tableCell}>{"Current stock: " + medication.current_stock}</Text>
                 </View>
                 </View>
+                <TouchableOpacity onPress={() => handleIncreaseStockWithConfirmation(medication.id)}>
+                    <Image source={addmed} style={styles.footerButton}/>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleDeleteWithConfirmation(medication.id)}>
                     <Image source={deletemed} style={styles.deletemed}/>
                 </TouchableOpacity>

@@ -6,10 +6,12 @@ import logo from '../assets/logo.png';
 import { useNavigation } from '@react-navigation/native';
 import RadioButton from '../assets/RadioButton.js';
 import count from '../assets/tabletcount.png';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const AddMedication = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [dosage_instructions, setDosageInstructions] = useState('');
   const [frequency, setFrequency] = useState('');
@@ -25,9 +27,9 @@ const AddMedication = () => {
         return;
     }
 
-    try {
-        const base64Image = await convertImageToBase64(picture); // Convert image to base64
+    const userEmailString = await AsyncStorage.getItem('userEmail');
 
+    try {  
         // Fetch CSRF token
         const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
         const csrfData = await csrfResponse.json();
@@ -40,8 +42,7 @@ const AddMedication = () => {
                 'X-CSRFToken': csrfToken,
             },
             body: JSON.stringify({ 
-                // HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
-                email: "ana@gmail.com",
+                email: userEmailString,
                 name: name,
                 dosage_instructions: dosage_instructions,
                 frequency: frequency,
@@ -87,33 +88,6 @@ const AddMedication = () => {
     { label: 'Three times a day', value: 'Three times a day' },
     { label: 'Other', value: 'Other'}
   ];
-
-  const convertImageToBase64 = async (uri) => {
-    try {
-        const response = await fetch(uri);
-        if (!response.ok) {
-            throw new Error('Failed to fetch image');
-        }
-        const blob = await response.blob();
-        const base64String = await blobToBase64(blob);
-        return base64String;
-    } catch (error) {
-        console.error('Error converting image to base64:', error);
-        return null; // Return null or handle the error gracefully
-    }
-};
-
-
-const blobToBase64 = (blob) => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onerror = reject;
-        reader.onload = () => {
-            resolve(reader.result.split(',')[1]);
-        };
-        reader.readAsDataURL(blob);
-    });
-};
 
   const getImageFromCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();

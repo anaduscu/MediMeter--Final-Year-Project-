@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, Text, View , Image, TouchableOpacity} from 'react-native';
 import CheckBox from '../../frontend/assets/CheckBox.js';
 import styles from '../../frontend/styles.js';
-import { get } from 'lodash';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Schedule = () => {
   const [medications, setMedications] = useState([]);
 
   const getMedications = async () => {
+    const userEmailString = await AsyncStorage.getItem('userEmail');
     try {
       // Fetch CSRF token
       const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
@@ -22,8 +24,7 @@ const Schedule = () => {
           'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({
-          //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
-          email: "ana@gmail.com",
+          email: userEmailString,
         })
       });
 
@@ -38,6 +39,31 @@ const Schedule = () => {
       console.log('Error getting medications:', error);
     }
   }
+
+  const handleTakeMedication = async (medicationId) => {
+    try {
+        const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
+        const csrfData = await csrfResponse.json();
+        const csrfToken = csrfData.csrf_token;
+    
+        const response = await fetch(`http://192.168.0.210:8000/MediMeter/medication/decrease_stock/${medicationId}/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+          },
+        });
+    
+        if (!response.ok) {
+          throw new Error('Failed to decrease stock');
+        } else {
+          // Handle successful deletion, e.g., update medication list
+          getMedications();
+        }
+      } catch (error) {
+        console.log('Error decreasing stock:', error);
+      }
+    }
 
   useEffect(() => {
     getMedications();
@@ -82,7 +108,14 @@ const Schedule = () => {
                         </View>
                         {morning.map((medication, index) => (
                             <View key={index}>
-                                <CheckBox name={medication.name} grams={medication.dosage_instructions} frequency={medication.frequency} dietaryRequirements={medication.dietary_restrictions} />
+                                <CheckBox 
+                                    name={medication.name} 
+                                    grams={medication.dosage_instructions} 
+                                    frequency={medication.frequency} 
+                                    dietaryRequirements={medication.dietary_restrictions} 
+                                    handleTakeMedication={handleTakeMedication} // Pass the function reference
+                                    medicationId={medication.id}  // Pass the medication ID
+                                />
                             </View>
                         ))}
                     </View>
@@ -93,7 +126,14 @@ const Schedule = () => {
                         </View>
                         {afternoon.map((medication, index) => (
                             <View key={index}>
-                                <CheckBox name={medication.name} grams={medication.dosage_instructions} frequency={medication.frequency} dietaryRequirements={medication.dietary_restrictions} />
+                                <CheckBox 
+                                    name={medication.name} 
+                                    grams={medication.dosage_instructions} 
+                                    frequency={medication.frequency} 
+                                    dietaryRequirements={medication.dietary_restrictions} 
+                                    handleTakeMedication={handleTakeMedication} // Pass the function reference
+                                    medicationId={medication.id}  // Pass the medication ID
+                                />
                             </View>
                         ))}
                     </View>
@@ -104,7 +144,14 @@ const Schedule = () => {
                         </View>
                         {evening.map((medication, index) => (
                             <View key={index}>
-                                <CheckBox name={medication.name} grams={medication.dosage_instructions} frequency={medication.frequency} dietaryRequirements={medication.dietary_restrictions} />
+                                <CheckBox 
+                                    name={medication.name} 
+                                    grams={medication.dosage_instructions} 
+                                    frequency={medication.frequency} 
+                                    dietaryRequirements={medication.dietary_restrictions} 
+                                    handleTakeMedication={handleTakeMedication} // Pass the function reference
+                                    medicationId={medication.id}  // Pass the medication ID
+                                />
                             </View>
                         ))}
                     </View>
