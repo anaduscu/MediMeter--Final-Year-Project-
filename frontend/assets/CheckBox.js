@@ -8,21 +8,17 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   const handleCheckBoxChange = () => {
     setIsChecked(!isChecked);
     handleTakeMedication(medicationId);
-    sendDataToDatabase(name);
-  };
-
-  const sendDataToDatabase = (medicineName) => {
-    // Implement your logic to send data to the database here
-    console.log(`Sending data related to ${medicineName} to the database...`);
   };
 
   return (
     <View style={styles.medicationItem}>
-      <TouchableOpacity onPress={handleCheckBoxChange}>
-        <View style={[styles.checkbox, { backgroundColor: isChecked ? 'blue' : '#FFF' }]} />
+      <TouchableOpacity onPress={isChecked ? null: handleCheckBoxChange}>
+        <View style={[styles.checkbox, { backgroundColor: isChecked ? '#24C697' : '#FFF' }]} />
+        <Text style={{marginTop: -25, marginLeft:5}}>{isChecked ? '✅' : '⬜'}</Text>
       </TouchableOpacity>
       <Text style={styles.medicationName}>
-        {name}{grams} (1 pill: {dietaryRequirements})
+        {name} {grams} (1 pill: {dietaryRequirements})        
+
       </Text>
     </View>
   );

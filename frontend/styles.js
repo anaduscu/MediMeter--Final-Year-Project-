@@ -474,6 +474,7 @@ const styles = StyleSheet.create({
 
   footer: {
     position: 'absolute',
+    marginTop: 20,
     bottom: 0,
     left: 0,
     right: 0,
@@ -630,6 +631,7 @@ const styles = StyleSheet.create({
     marginTop: -1,
     },
 
+
     //Add medication
 
     addmedication: {
@@ -751,11 +753,16 @@ const styles = StyleSheet.create({
         marginLeft: 20,
       },
   
+      table: {
+        flex: 1,
+        paddingBottom: 100,
+      },
+
     tableRow: {
       color: '#1A1F53',
       fontSize: 15,
       fontWeight: 'bold',
-      width: 210,
+      width: 200,
       borderColor: 'white',
       borderWidth: 2,
     },
@@ -786,9 +793,10 @@ const styles = StyleSheet.create({
     deletemed : {
       width: 35,
       padding: 15,
-      height: 40,
-      marginLeft: -50,
-      marginTop: 90,
+      height: 35,
+      marginLeft: 155,
+      marginTop: -60,
+      marginBottom: 10,
       backgroundColor: '#FF443A',
       borderRadius: 10, // Set the border radius to make it rounded
       justifyContent: 'center',
@@ -796,11 +804,23 @@ const styles = StyleSheet.create({
     },
 
     addmed : {
-      width: 35,
+      width: 45,
       padding: 15,
       height: 40,
       marginLeft: 50,
       marginTop: 40,
+      backgroundColor: '#FF443A',
+      borderRadius: 10, // Set the border radius to make it rounded
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    increaseStock: {
+      width: 35,
+      padding: 15,
+      height: 35,
+      marginLeft: 155,
+      marginTop: 0,
       backgroundColor: '#FF443A',
       borderRadius: 10, // Set the border radius to make it rounded
       justifyContent: 'center',

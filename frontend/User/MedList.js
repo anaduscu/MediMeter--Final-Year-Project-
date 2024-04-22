@@ -6,6 +6,7 @@ import logo from '../../frontend/assets/logo.png';
 import styles from '../../frontend/styles.js';
 import deletemed from '../../frontend/assets/deletemed.png';
 import addmed from '../../frontend/assets/addmed.png';
+import stock from '../../frontend/assets/stock.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import {getUserEmail} from '../../frontend/Storage.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -154,7 +155,7 @@ const handleDelete = async (medicationId) => {
     
     if (medications.length === 0) {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container,{marginTop:-100}]}>
                 <Image source={logo} style={styles.logo} />
                 <View style={styles.content}>
                         <Text style={styles.heading}>{'Your Medications'}</Text>
@@ -193,11 +194,11 @@ const handleDelete = async (medicationId) => {
     } else {
     return (
         <View style={styles.container}>
-        <Image source={logo} style={styles.logo} />
+        <Image source={logo} style={[styles.logo,{marginTop:50}]} />
         <View style={styles.content}>
                 <Text style={styles.heading}>{'Your Medications'}</Text>
-            </View> 
-        <ScrollView style={styles.table}>
+        </View> 
+        <ScrollView style={{ flex: 1, paddingBottom: 100 }}>
             {medications.map((medication, index) => (
             <View style={styles.med} key={index}>
                 {medication.picture && <Image source={{ uri: medication.picture }} style={{ width: 150, height: 150, borderWidth: 2, borderColor: 'white' }} />}
@@ -208,20 +209,20 @@ const handleDelete = async (medicationId) => {
                     <Text style={styles.tableCell}>{medication.frequency}</Text>
                     <Text style={styles.tableCell}>{"Current stock: " + medication.current_stock}</Text>
                 </View>
-                </View>
-                <TouchableOpacity onPress={() => handleIncreaseStockWithConfirmation(medication.id)}>
-                    <Image source={addmed} style={styles.footerButton}/>
+                <TouchableOpacity style={styles.deletemed} onPress={() => handleDeleteWithConfirmation(medication.id)}>
+                    <Image source={deletemed} style={{height:25, width:20}}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleDeleteWithConfirmation(medication.id)}>
-                    <Image source={deletemed} style={styles.deletemed}/>
-                </TouchableOpacity>
+                <TouchableOpacity style={styles.increaseStock} onPress={() => handleIncreaseStockWithConfirmation(medication.id)}>
+                    <Image source={stock} style={{height:30, width: 30}}/>
+                </TouchableOpacity>    
+                </View>        
             </View>
             ))}
             <View style={[styles.content, styles.nextstep]}>
                 <Text style={[styles.buttoninfo, styles.bluebox, {fontSize: 16, height: 80, width: 200}]}>{"Click the + button to add more medications to your list"}</Text>
-                <TouchableOpacity style={styles.addmed}onPress={() => navigation.navigate('AddMedication')}> 
-                <Image source={addmed} style={{height:30, width:30}}/>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.addmed}onPress={() => navigation.navigate('AddMedication')}> 
+                        <Image source={addmed} style={{height:30, width:30}}/>
+                    </TouchableOpacity>
             </View>
         </ScrollView>
         <View style={styles.footer}>

@@ -128,7 +128,7 @@ const AddMedication = () => {
 
   return (
     <View style={styles.container}>
-        <Image source={logo} style={styles.logo} />
+        <Image source={logo} style={[styles.logo,{marginTop:50}]} />
         <View style={styles.content}>
             <Text style={styles.heading}>{'Add Medication'}</Text>
         </View>      
