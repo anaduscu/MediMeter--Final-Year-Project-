@@ -845,6 +845,15 @@ const styles = StyleSheet.create({
 
     },
 
+    listItem  : {
+      marginLeft: 20,
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: 'white',
+      marginTop: 10,
+      marginBottom: 10,
+    },
+
 });
 
 

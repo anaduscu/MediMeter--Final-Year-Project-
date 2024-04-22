@@ -40,7 +40,7 @@ const LogIn = () => {
             'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({
-            email: email,
+            email: email, 
             password: password,
         })
       });
