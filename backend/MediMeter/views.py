@@ -100,12 +100,10 @@ def box_used(request):
             return JsonResponse({'error': 'Invalid JSON format'}, status=400)
         
         pillbox_used = data.get('pillbox_used', '')
-        print(pillbox_used)
         if pillbox_used == 'Yes':
             pillbox_used = True
         else:
             pillbox_used = False
-        print(pillbox_used)
         email = data.get('email', '')
         user = User.objects.get(email=email)
 
@@ -190,7 +188,6 @@ def get_personal_info(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            print('Request data:', data)
             email = data.get('email', '')
             user = User.objects.get(email=email)
             caregiver = Caregiver.objects.filter(user=user)

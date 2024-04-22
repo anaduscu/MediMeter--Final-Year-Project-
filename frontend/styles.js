@@ -818,7 +818,32 @@ const styles = StyleSheet.create({
       color: '#1A1F53',
       fontSize: 24,
       fontWeight: 'bold',
-    }
+    },
+
+    //Personal Info
+    personalInfoItem: {
+      backgroundColor: '#FFDE59',
+      width: 350,
+      marginLeft: 20,
+      height: 250,
+      marginBottom: 50,      
+    },
+
+    personalInfoText: {
+      color: '#1A1F53',
+      fontSize: 18,
+      fontWeight: 'bold',
+      width: 340,
+      height: 30,
+      padding: 5,
+    },
+
+    backtodash : {
+      width: 100,
+      height: 40,
+      marginTop: -50,
+
+    },
 
 });
 

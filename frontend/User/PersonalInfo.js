@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../../frontend/styles.js';
 import logo from '../../frontend/assets/logo.png';
+import dash from '../../frontend/assets/dash.png';
 import { use } from 'ast-types';
 
 const PersonalInfo = () => {
@@ -36,7 +37,6 @@ const PersonalInfo = () => {
             } else {
 
             const data = await response.json();
-            console.log('Personal info:', data);
             setPersonalInfo(data.personalInfo);
             }
         } catch (error) {
@@ -49,40 +49,27 @@ const PersonalInfo = () => {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,{marginTop:-100}]}>
             <Image source={logo} style={styles.logo} />
-            <Text style={styles.heading}>Your Personal Information</Text>
+            <Text style={[styles.heading, {marginLeft: 20}]}>Your Personal Information</Text>
+            <Text style={[styles.info,{height: 150}]}>Here you can see the personal information you provided when you created your account.</Text>
             <View style={styles.personalInfoItem}>
                 <Text style={styles.personalInfoText}>Name: {personalInfo.firstname}</Text>
                 <Text style={styles.personalInfoText}>Surname: {personalInfo.lastname}</Text>
                 <Text style={styles.personalInfoText}>Email: {personalInfo.email}</Text>
                 <Text style={styles.personalInfoText}>Gender: {personalInfo.gender}</Text>
                 <View>
-                    <Text style={styles.personalInfoText}>Contact details of trusted person:</Text>
+                    <Text style={[styles.personalInfoText,{fontSize:21, marginTop: 10, color:'#335AF8'}]}>Contact details of trusted person:</Text>
                     <Text style={styles.personalInfoText}>Email: {personalInfo.caregiver}</Text>
                     <Text style={styles.personalInfoText}>Telephone: {personalInfo.phone_number}</Text>
                 </View>
-                </View>
-            <View style={styles.footer}>
-            <Text style={styles.footerInstr}>Click on each button to see:</Text>
-            <View style={styles.footerLabels}>
-                  <Text style={styles.footerText}>Your schedule </Text>
-                  <Text style={styles.footerText}>Your list of medications</Text>
-                  <Text style={styles.footerText}>How the app works</Text>
             </View>
-            <View style={styles.footerButtons}>
-                <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Dashboard')}>
-                    <Image source={require('../../frontend/assets/dash.png')} style={styles.footerImage}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('MedList')}>
-                    <Image source={require('../../frontend/assets/medlist.png')} style={styles.footerImage}></Image>
-                </TouchableOpacity>
-                
-                <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('AppInfo')}>
-                    <Image source={require('../../frontend/assets/info.png')} style={styles.footerImage}></Image>
+            <View style={[styles.content, styles.nextstep, styles.backtodash]}>
+                <Text style={[styles.buttoninfo, styles.bluebox, {fontSize: 16, height: 80, width: 200}]}>{"Click the red button to go back to your schedule"}</Text>
+                <TouchableOpacity style={[styles.footerButton, {marginTop: 35}]}onPress={() => navigation.navigate('Dashboard')}> 
+                <Image style={styles.footerImage} source={dash} />
                 </TouchableOpacity>
             </View>
-          </View> 
         </View>
     );
 };
