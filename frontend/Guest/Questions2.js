@@ -7,6 +7,7 @@ import RadioButton from '../../frontend/assets/RadioButton.js';
 import pillbox from '../../frontend/assets/pillbox.jpg';
 import { TextInput } from 'react-native-gesture-handler';
 import { KeyboardAvoidingView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -37,7 +38,10 @@ const Questions1 = () => {
       return;
     }
   
+
     try {
+      const userEmailString = await AsyncStorage.getItem('userEmail');
+
       // Fetch CSRF token
       const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
       const csrfData = await csrfResponse.json();
@@ -59,7 +63,7 @@ const Questions1 = () => {
         },
         body: JSON.stringify({
             //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
-            user_email: 'ana@gmail.com',
+            user_email: userEmailString,
             email: email,
             phone_number: phone_number,
             brings_medication: selectedOption1,

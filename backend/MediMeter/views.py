@@ -189,9 +189,11 @@ def get_personal_info(request):
         try:
             data = json.loads(request.body)
             email = data.get('email', '')
+            print(email)
             user = User.objects.get(email=email)
             caregiver = Caregiver.objects.filter(user=user)
             caregiver_list = list(caregiver.values())
+            print(caregiver_list)
             user_info = {
                 'email': user.email,  # Simplified response with only email
                 'firstname': user.firstname,

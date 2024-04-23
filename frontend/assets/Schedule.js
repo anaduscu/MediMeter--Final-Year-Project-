@@ -90,6 +90,8 @@ const Schedule = () => {
         evening.push(medication);
     }
     });
+
+    const expectedCheck = morning.length + afternoon.length + evening.length;
     
     if (medications.length === 0) {
         return (
@@ -115,6 +117,7 @@ const Schedule = () => {
                                     dietaryRequirements={medication.dietary_restrictions} 
                                     handleTakeMedication={handleTakeMedication} // Pass the function reference
                                     medicationId={medication.id}  // Pass the medication ID
+                                    expectedCheck={morning.length}
                                 />
                             </View>
                         ))}
@@ -133,6 +136,7 @@ const Schedule = () => {
                                     dietaryRequirements={medication.dietary_restrictions} 
                                     handleTakeMedication={handleTakeMedication} // Pass the function reference
                                     medicationId={medication.id}  // Pass the medication ID
+                                    expectedCheck={afternoon.length}
                                 />
                             </View>
                         ))}
@@ -151,6 +155,7 @@ const Schedule = () => {
                                     dietaryRequirements={medication.dietary_restrictions} 
                                     handleTakeMedication={handleTakeMedication} // Pass the function reference
                                     medicationId={medication.id}  // Pass the medication ID
+                                    expectedCheck={evening.length}
                                 />
                             </View>
                         ))}

@@ -10,6 +10,7 @@ import stock from '../../frontend/assets/stock.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import {getUserEmail} from '../../frontend/Storage.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SMS from '../../frontend/SMS.js';
 
 
 const MedList = () => {
@@ -158,6 +159,7 @@ const handleDelete = async (medicationId) => {
             <View style={[styles.container,{marginTop:-100}]}>
                 <Image source={logo} style={styles.logo} />
                 <View style={styles.content}>
+                    <SMS></SMS>
                         <Text style={styles.heading}>{'Your Medications'}</Text>
                     </View> 
                 <View style={styles.table}>
@@ -197,6 +199,8 @@ const handleDelete = async (medicationId) => {
         <Image source={logo} style={[styles.logo,{marginTop:50}]} />
         <View style={styles.content}>
                 <Text style={styles.heading}>{'Your Medications'}</Text>
+                <SMS></SMS>
+
         </View> 
         <ScrollView style={{ flex: 1, paddingBottom: 100 }}>
             {medications.map((medication, index) => (

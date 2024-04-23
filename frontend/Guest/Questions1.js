@@ -5,6 +5,7 @@ import logo from '../../frontend/assets/logo.png';
 import { useNavigation } from '@react-navigation/native';
 import RadioButton from '../../frontend/assets/RadioButton.js';
 import pillbox from '../../frontend/assets/pillbox.jpg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Questions1 = () => {
@@ -31,6 +32,7 @@ const Questions1 = () => {
     }
 
     const handleContinue = async () => {
+      const userEmailString = await AsyncStorage.getItem('userEmail');
       if(selectedOption1 === '' || selectedOption2 === ''){
         alert('Please select an option for both questions before continuing');
         return;
@@ -52,7 +54,7 @@ const Questions1 = () => {
         },
         body: JSON.stringify({
             //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
-             email: "ana@gmail.com",
+             email: userEmailString,
              gender: selectedOption1,
         })
       });
@@ -90,7 +92,7 @@ const Questions1 = () => {
       },
       body: JSON.stringify({
           //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
-          email: "ana@gmail.com",
+          email: userEmailString,
           pillbox_used: selectedOption2,
       })
     })
