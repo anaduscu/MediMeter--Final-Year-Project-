@@ -3,10 +3,13 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../../frontend/styles.js';
 import { setUserEmail } from '../../frontend/Storage.js';
 import * as Notifications from 'expo-notifications';
+import {sendEmail} from '../../frontend/assets/email.js';
+import Notifs from '../../frontend/assets/notifs.js'; // Correct way to import a default export
 
 const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedication, medicationId, expectedCheck }) => {
   const [isChecked, setIsChecked] = useState(false); 
   const [numChecked, setNumChecked] = useState(0);
+  const [timerId, setTimerId] = useState(null);
 
   const handleCheckBoxChange = () => {
     setIsChecked(!isChecked);
@@ -15,53 +18,36 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   };
 
   const checkEquality = () => {
-    if (numChecked !== expectedCheck) {
-      scheduleNotification();
-    }
-  };
-
-  useEffect(() => {
-    // Check equality on component mount and setup interval for continuous monitoring
     console.log('Checking equality...');
-    console.log('Expected:', expectedCheck);
-    console.log('Actual:', numChecked);
-    checkEquality();
-    const intervalId = setInterval(checkEquality, 5000); // Check every 10 seconds
-
-    // Clean up interval on component unmount
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const scheduleNotification = async () => {
-    const trigger = new Date();
-    // Set your trigger time here according to your requirements
-    trigger.setHours(15); // 9 AM
-    trigger.setMinutes(40);
-
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: 'Reminder',
-        body: 'Number of checked boxes does not match the expected count!',
-      },
-      trigger,
-    });
+    console.log('Number of checked boxes:', numChecked);
+    console.log('Expected count:', expectedCheck);
+    if (numChecked !== expectedCheck) {
+        console.log('N?o');
+        return <Notifs title={"HELLO"} body={"idk"}></Notifs>
+        // sendEmail({ email: 'ana.duscu17@gmail.com', s: 'Number of checked boxes does not match the expected count!', b: 'Please check the number of checked boxes in the app.' });
+    }
   };
 
   useEffect(() => {
     // Reset checkbox state at a specific time (e.g., midnight)
     const resetAtMidnight = setTimeout(() => {
+      checkEquality();
+      console.log('Resetting checkboxes...');
       setIsChecked(false);
       setNumChecked(0);
     }, calculateTimeUntilMidnight());
 
     // Clear timeout on component unmount
-    return () => clearTimeout(resetAtMidnight);
+    return () => {
+      if (timerId) clearInterval(timerId);
+      clearTimeout(resetAtMidnight);
+    };
   }, []);
 
   const calculateTimeUntilMidnight = () => {
     const now = new Date();
     const midnight = new Date();
-    midnight.setHours(15, 40, 0, 0); // Set to midnight
+    midnight.setHours(22, 28, 0, 0); // Set to midnight
     return midnight - now; // Time until midnight in milliseconds
   };
 

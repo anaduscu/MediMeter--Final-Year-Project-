@@ -159,7 +159,6 @@ const handleDelete = async (medicationId) => {
             <View style={[styles.container,{marginTop:-100}]}>
                 <Image source={logo} style={styles.logo} />
                 <View style={styles.content}>
-                    <SMS></SMS>
                         <Text style={styles.heading}>{'Your Medications'}</Text>
                     </View> 
                 <View style={styles.table}>
@@ -199,8 +198,6 @@ const handleDelete = async (medicationId) => {
         <Image source={logo} style={[styles.logo,{marginTop:50}]} />
         <View style={styles.content}>
                 <Text style={styles.heading}>{'Your Medications'}</Text>
-                <SMS></SMS>
-
         </View> 
         <ScrollView style={{ flex: 1, paddingBottom: 100 }}>
             {medications.map((medication, index) => (

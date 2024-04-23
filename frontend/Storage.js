@@ -8,6 +8,14 @@ const setUserEmail = async (email) => {
   }
 };
 
+const setCheckedStates = async (checkedStates) => {
+  try {
+    await AsyncStorage.setItem('checkedStates', checkedStates);
+  } catch (error) {
+    console.error('Error setting checked states:', error);
+  }
+};
+
 
 const getUserEmail = async () => {
   return userEmailString = await AsyncStorage.getItem('userEmail');

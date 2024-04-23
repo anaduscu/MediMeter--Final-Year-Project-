@@ -15,8 +15,6 @@ import MedList from './User/MedList.js';
 import AddMedication from './User/AddMedication.js';
 import PersonalInfo from './User/PersonalInfo.js';
 import AppInfo from './User/AppInfo.js';
-import notifs from '../frontend/notifs.js';
-import SMS from '../frontend/SMS.js';
 
 const Stack = createStackNavigator();
 
@@ -40,8 +38,6 @@ const App = () => {
         <Stack.Screen name="AddMedication" component={AddMedication} />
         <Stack.Screen name="PersonalInfo" component={PersonalInfo} />
         <Stack.Screen name="AppInfo" component={AppInfo} />
-        <Stack.Screen name="Notifs" component={notifs} />
-        <Stack.Screen name="SMS" component={SMS} />
       </Stack.Navigator>
     </NavigationContainer>
   );

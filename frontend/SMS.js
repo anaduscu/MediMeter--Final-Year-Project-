@@ -1,16 +1,14 @@
-import React from 'react';
 import { View, Button, Alert } from 'react-native';
 import { encode as base64Encode } from 'base-64';
-import styles from '../frontend/styles.js';
 
 const accountSid = 'AC7f72d26a0c2769c63369cf4623995e64';
 const authToken = '5b3760ad7252ccf25c3856426d5d923f';
 
-const sendSMS = async () => {
+const sendSMS = async (body, to) => {
     const bodyParams = new URLSearchParams({
-        Body: 'Testing',
+        Body: body,
         From: '+447888864484',
-        To: '+447760508740', // Replace with your own phone number
+        To: to,
       });    
       
       try {
@@ -41,17 +39,9 @@ const sendSMS = async () => {
     }
   };
   
+//   const handlePress = async () => {
+//     await sendSMS();
+//   };
 
-const SMSScreen = () => {
-  const handlePress = async () => {
-    await sendSMS();
-  };
 
-  return (
-    <View>
-      <Button style={styles.backbutton} title="Send Test SMS" onPress={handlePress} />
-    </View>
-  );
-};
 
-export default SMSScreen;
