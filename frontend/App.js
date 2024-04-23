@@ -23,7 +23,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Notifs"
+        initialRouteName="Dashboard"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="LandingPage" component={LandingPage} />

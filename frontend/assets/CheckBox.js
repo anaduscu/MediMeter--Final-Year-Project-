@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import styles from '../../frontend/styles.js';
 import { setUserEmail } from '../../frontend/Storage.js';
 
-const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedication , medicationId}) => {
+const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedication , medicationId, checkboxes, checkboxStates}) => {
   const [isChecked, setIsChecked] = useState(false);
   const handleCheckBoxChange = () => {
     setIsChecked(!isChecked);
@@ -18,7 +18,6 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
       </TouchableOpacity>
       <Text style={styles.medicationName}>
         {name} {grams} (1 pill: {dietaryRequirements})        
-
       </Text>
     </View>
   );

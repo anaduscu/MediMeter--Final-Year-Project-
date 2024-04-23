@@ -77,21 +77,36 @@ const Schedule = () => {
     const morning = [];
     const afternoon = [];
     const evening = [];
+    const checkboxes = [];
 
     medications.forEach(medication => {
     if (medication.frequency === 'Once a day') {
         morning.push(medication);
+        checkboxes.push(medication);
     } else if (medication.frequency === 'Twice a day') {
         morning.push(medication);
+        checkboxes.push(medication);
         afternoon.push(medication);
+        checkboxes.push(medication);
     } else if (medication.frequency === 'Three times a day') {
         morning.push(medication);
+        checkboxes.push(medication);
         afternoon.push(medication);
+        checkboxes.push(medication);
         evening.push(medication);
+        checkboxes.push(medication);
     }
     });
+
+    const numCheckBoxes = morning.length + afternoon.length + evening.length;
+
+    const checkboxStates = Array(numCheckBoxes).fill(false);
     
-    
+    console.log('Number of checkboxes:', numCheckBoxes);
+    console.log('Checkboxes:', checkboxes);
+    console.log('Checkbox states:', checkboxStates);
+    // console.log('Morning:', morning);
+
     if (medications.length === 0) {
         return (
           <View style={styles.items}>
@@ -116,6 +131,8 @@ const Schedule = () => {
                                     dietaryRequirements={medication.dietary_restrictions} 
                                     handleTakeMedication={handleTakeMedication} // Pass the function reference
                                     medicationId={medication.id}  // Pass the medication ID
+                                    current={index}
+                                    checkboxStates={checkboxStates}
                                 />
                             </View>
                         ))}

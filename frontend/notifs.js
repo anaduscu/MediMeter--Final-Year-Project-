@@ -10,8 +10,8 @@ const Notifs = () => {
 
   const scheduleNotification = async () => {
     const trigger = new Date();
-    trigger.setHours(22); // 9 PM
-    trigger.setMinutes(16);
+    trigger.setHours(0); // 9 PM
+    trigger.setMinutes(53);
 
     await Notifications.scheduleNotificationAsync({
       content: {
