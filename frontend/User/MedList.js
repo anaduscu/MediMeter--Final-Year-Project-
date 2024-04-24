@@ -10,7 +10,7 @@ import stock from '../../frontend/assets/stock.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import {getUserEmail} from '../../frontend/Storage.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SMS from '../../frontend/SMS.js';
+import SMS from '../assets/SMS.js';
 
 
 const MedList = () => {

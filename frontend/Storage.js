@@ -8,18 +8,49 @@ const setUserEmail = async (email) => {
   }
 };
 
-const setCheckedStates = async (checkedStates) => {
+const setCaregiverEmail = async (email) => {
   try {
-    await AsyncStorage.setItem('checkedStates', checkedStates);
+    await AsyncStorage.setItem('caregiverEmail', email);
   } catch (error) {
-    console.error('Error setting checked states:', error);
+    console.error('Error setting caregiver email:', error);
   }
 };
 
+const setCaregiverPhone = async (phone) => {
+  try {
+    await AsyncStorage.setItem('caregiverPhone', phone);
+  } catch (error) {
+    console.error('Error setting caregiver phone:', error);
+  }
+};
+
+const setPillboxUsed = async (pillboxUsed) => {
+  try {
+    await AsyncStorage.setItem('pillboxUsed', pillboxUsed);
+  } catch (error) {
+    console.error('Error setting pillbox used:', error);
+  }
+};
+
+const setUserName = async (name) => {
+  try {
+    await AsyncStorage.setItem('userName', name);
+  } catch (error) {
+    console.error('Error setting user name:', error);
+  }
+};
+
+const setBringsMedication = async (bringsMedication) => {
+  try {
+    await AsyncStorage.setItem('bringsMedication', bringsMedication);
+  } catch (error) {
+    console.error('Error setting brings medication:', error);
+  }
+};
 
 const getUserEmail = async () => {
   return userEmailString = await AsyncStorage.getItem('userEmail');
 };
 
 
-export { setUserEmail, getUserEmail };
+export { setUserEmail, getUserEmail , setCaregiverEmail, setCaregiverPhone, setPillboxUsed, setUserName, setBringsMedication};

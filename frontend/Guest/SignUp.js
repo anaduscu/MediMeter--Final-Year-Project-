@@ -5,7 +5,7 @@ import logo from '../../frontend/assets/logo.png';
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAvoidingView } from 'react-native';
-import {setUserEmail} from '../../frontend/Storage.js';
+import {setUserEmail, setUserName} from '../../frontend/Storage.js';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -64,6 +64,7 @@ const SignUp = () => {
         const data = await response.json();
         console.log('Registration successful:', data);
         setUserEmail(email);
+        setUserName(firstName);
         navigation.navigate('Step2');
       }
     } catch (error) {

@@ -7,6 +7,7 @@ import RadioButton from '../../frontend/assets/RadioButton.js';
 import pillbox from '../../frontend/assets/pillbox.jpg';
 import { TextInput } from 'react-native-gesture-handler';
 import { KeyboardAvoidingView } from 'react-native';
+import {setCaregiverEmail, setCaregiverPhone, setBringsMedication} from '../../frontend/Storage.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -62,7 +63,6 @@ const Questions1 = () => {
             'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({
-            //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
             user_email: userEmailString,
             email: email,
             phone_number: phone_number,
@@ -80,6 +80,9 @@ const Questions1 = () => {
         }
       } else {
         const data = await response.json();
+        setCaregiverEmail(email);
+        setCaregiverPhone(phone_number);
+        setBringsMedication(selectedOption1);
         console.log('Caregiver registration successful:', data);
         navigation.navigate('LogIn');
       }
