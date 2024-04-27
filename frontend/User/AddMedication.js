@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, Button, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TextInput, Button, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styles from '../styles.js';
 import logo from '../assets/logo.png';
@@ -19,11 +19,11 @@ const AddMedication = () => {
   const [picture, setPicture] = useState(null);
   const [tabletcount, setTabletCount] = useState('');
   const [current_stock, setCurrentStock] = useState('');
-  const [missedDose, setMissedDose] = useState('');
+  const [refill_date, setRefillDate] = useState('');
 
   const handleAddMedication = async () => {
     if (name === '' || dosage_instructions === '' || frequency === '' || dietary_restrictions === '' || picture === null || tabletcount === '' || current_stock === '') {
-        alert('Please fill in all fields');
+        Alert.alert('Incomplete fields' ,'Please fill in all details. If you are unsure, please ask someone you trust for help.');
         return;
     }
 
@@ -56,22 +56,23 @@ const AddMedication = () => {
         if (!response.ok) {
             throw new Error('Failed to add medication');
         } else {
-            alert('Medication added successfully');
+            Alert.alert('Medication added', 'Medication added successfully to your list.');
             navigation.navigate('MedList');
         }
     } catch (error) {
         console.error('Error adding medication:', error);
-        alert('Failed to add medication: ' + error.message);
+        Alert.alert('Something went wrong', 'Failed to add medication: ' + error.message);
     }
     
 };
 
 
+
   const options1 = [
     { label: '100mg', value: '100mg' },
     { label: '200mg', value: '200mg' },
-    { label: '500mg', value: '300mg' },
-    { label: 'Other', value: 'Other'}
+    { label: '500mg', value: '500mg' },
+    { label: '900mg', value: '900mg'}
   ];
 
   const options2 = [
@@ -86,32 +87,25 @@ const AddMedication = () => {
     { label: 'Once a day', value: 'Once a day' },
     { label: 'Twice a day', value: 'Twice a day' },
     { label: 'Three times a day', value: 'Three times a day' },
-    { label: 'Other', value: 'Other'}
   ];
 
   const getImageFromCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {
-      alert('Sorry, we need camera permissions to make this work!');
+      alert("Please select the 'Allow' option to take a picture of your medication.");
       return;
     }
 
   };
 
-  const pickImage = async () => {
-    console.log('pickImage function called');
-    
-    await getImageFromCamera();
-  
-    console.log('Camera permissions granted, launching camera...');
-    
+  const pickImage = async () => {    
+    await getImageFromCamera();    
     let result = await ImagePicker.launchCameraAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
     });
-    console.log('ImagePicker result:', result);
     const uri = result.assets[0].uri;
     console.log('Image URI:', uri);
 

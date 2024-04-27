@@ -78,11 +78,11 @@ const handleDelete = async (medicationId) => {
         'Are you sure you want to delete this medication?',
         [
         {
-            text: 'Cancel',
-            style: 'cancel',
+            text: 'No',
+            style: 'No',
         },
         {
-            text: 'Delete',
+            text: 'Yes',
             onPress: () => handleDelete(medicationId),
         },
         ],
@@ -108,8 +108,6 @@ const handleDelete = async (medicationId) => {
         );
     };
 
-  
-
   const getMedications = async () => {
     const userEmailString = await AsyncStorage.getItem('userEmail');
 
@@ -127,7 +125,6 @@ const handleDelete = async (medicationId) => {
           'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({
-          //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
           email: userEmailString,
         })
       });
@@ -156,8 +153,8 @@ const handleDelete = async (medicationId) => {
     
     if (medications.length === 0) {
         return (
-            <View style={[styles.container,{marginTop:-100}]}>
-                <Image source={logo} style={styles.logo} />
+            <View style={styles.container}>
+                <Image source={logo} style={[styles.logo,{marginTop:50}]} />
                 <View style={styles.content}>
                         <Text style={styles.heading}>{'Your Medications'}</Text>
                     </View> 
@@ -209,6 +206,7 @@ const handleDelete = async (medicationId) => {
                     <Text style={styles.tableCell}>{"1 pill: " + medication.dietary_restrictions}</Text>
                     <Text style={styles.tableCell}>{medication.frequency}</Text>
                     <Text style={styles.tableCell}>{"Current stock: " + medication.current_stock}</Text>
+                    <Text style={styles.tableCell}>{"Next refill: " + medication.refill_date}</Text>
                 </View>
                 <TouchableOpacity style={styles.deletemed} onPress={() => handleDeleteWithConfirmation(medication.id)}>
                     <Image source={deletemed} style={{height:25, width:20}}/>

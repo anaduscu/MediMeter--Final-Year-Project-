@@ -3,6 +3,10 @@ import { ScrollView, Text, View , Image, TouchableOpacity} from 'react-native';
 import CheckBox from '../../frontend/assets/CheckBox.js';
 import styles from '../../frontend/styles.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Notifs } from '../../frontend/assets/notifs.js'; // Correct import path
+import Storage from '../../frontend/Storage.js';
+import {sendEmail} from '../../frontend/assets/email.js';
+import { sendSMS } from '../../frontend/assets/SMS.js';
 
 
 const Schedule = () => {
@@ -40,7 +44,7 @@ const Schedule = () => {
     }
   }
 
-  const handleTakeMedication = async (medicationId) => {
+  const handleTakeMedication = async (medicationId, medicationName) => {
     try {
         const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
         const csrfData = await csrfResponse.json();
@@ -52,18 +56,96 @@ const Schedule = () => {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrfToken,
           },
-        });
+        }); 
     
         if (!response.ok) {
           throw new Error('Failed to decrease stock');
         } else {
-          // Handle successful deletion, e.g., update medication list
-          getMedications();
+          const lowstock = handleLowStock(medicationId);
+          if (lowstock) {
+            Notifs('Low Stock', 'You are running low on ' + medicationName + '. Please refill your stock.');
+            const bringsMedication = await AsyncStorage.getItem('bringsMedication');
+            const userName = await AsyncStorage.getItem('userName');
+            const e = await AsyncStorage.getItem('caregiverEmail');
+            const p = await AsyncStorage.getItem('caregiverPhone');
+            console.log(p);
+            if (bringsMedication === "Someone else") {
+                sendEmail({ email: e, s:'MediMeter: Low Medication Stock', b: userName + " is running low on " + medicationName + ". \nYou may want to refill their stock."});
+                // sendSMS (userName + " is running low on " + medicationName + ". \nYou may want to refill their stock.", p);
+            }
+        }
+
         }
       } catch (error) {
         console.log('Error decreasing stock:', error);
       }
+
     }
+
+    const handleLowStock = async (medicationId) => {
+        const userEmailString = await AsyncStorage.getItem('userEmail');
+        try {
+        // Fetch CSRF token
+        const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
+        const csrfData = await csrfResponse.json();
+        const csrfToken = csrfData.csrf_token;
+
+        // Make the request with the CSRF token
+        const response = await fetch(`http://192.168.0.210:8000/MediMeter/medication/get_stock/${medicationId}/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+          },
+          body: JSON.stringify({
+            email: userEmailString,
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to get stock');
+        } else {
+          const data = await response.json();
+          if (data.current_stock <= 3) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      } catch (error) {
+        console.log('Error getting stock:', error);
+      }
+    }
+
+    const handleRefillDate = async (medicationId) => {    
+        try {  
+            // Fetch CSRF token
+            const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
+            const csrfData = await csrfResponse.json();
+            const csrfToken = csrfData.csrf_token;
+        
+            const response = await fetch(`http://192.168.0.210:8000/MediMeter/medication/set_refill_date/${medicationId}/`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+              },
+            });
+    
+            if (!response.ok) {
+              throw new Error('Failed to set refill date');
+            } else {
+              Alert.alert('Refill date set', 'Refill date set successfully.');
+              navigation.navigate('MedList');
+            }
+          } catch (error) {
+            console.error('Error setting refill date:', error);
+            Alert.alert('Something went wrong', 'Failed to set refill date: ' + error.message);
+          }
+    };
+  
+
+        
 
   useEffect(() => {
     getMedications();
@@ -117,7 +199,9 @@ const Schedule = () => {
                                     dietaryRequirements={medication.dietary_restrictions} 
                                     handleTakeMedication={handleTakeMedication} // Pass the function reference
                                     medicationId={medication.id}  // Pass the medication ID
+                                    medicationName={medication.name}
                                     expectedCheck={morning.length}
+                                    handleRefillDate={handleRefillDate}
                                 />
                             </View>
                         ))}
@@ -136,7 +220,9 @@ const Schedule = () => {
                                     dietaryRequirements={medication.dietary_restrictions} 
                                     handleTakeMedication={handleTakeMedication} // Pass the function reference
                                     medicationId={medication.id}  // Pass the medication ID
+                                    medicationName={medication.name}
                                     expectedCheck={afternoon.length}
+                                    handleRefillDate={handleRefillDate}
                                 />
                             </View>
                         ))}
@@ -155,7 +241,9 @@ const Schedule = () => {
                                     dietaryRequirements={medication.dietary_restrictions} 
                                     handleTakeMedication={handleTakeMedication} // Pass the function reference
                                     medicationId={medication.id}  // Pass the medication ID
+                                    medicationName={medication.name}
                                     expectedCheck={evening.length}
+                                    handleRefillDate={handleRefillDate}
                                 />
                             </View>
                         ))}

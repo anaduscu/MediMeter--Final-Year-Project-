@@ -1,27 +1,26 @@
-import React, { useEffect } from 'react';
 import * as Notifications from 'expo-notifications';
 
-const Notifs = ({ title, body }) => {
-  useEffect(() => {
-    // Schedule a notification
-    scheduleNotification(title, body);
-    
-  }, [title, body]);
-
+export const Notifs = ({ title, body }) => {
   const scheduleNotification = async (title, body) => {
-    const trigger = new Date();
-    trigger.setHours(22); // 9 PM
-    trigger.setMinutes(22);
-
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: title,
-        body: body,
-      },
-      trigger, // We don't need a trigger for this test
-    });
+    try {
+      console.log('Scheduling notification...');
+      
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: title,
+          body: body,
+        },
+        trigger: null,
+      });
+      
+      console.log('Notification scheduled successfully');
+    } catch (error) {
+      console.error('Error scheduling notification:', error);
+    }
   };
 
-};
+  // Call scheduleNotification when the component renders
+  scheduleNotification(title, body);
 
-export default Notifs;
+  return null; // Since this component doesn't render anything
+};

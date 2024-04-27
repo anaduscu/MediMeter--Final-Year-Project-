@@ -5,18 +5,16 @@ import { setUserEmail } from '../../frontend/Storage.js';
 import * as Notifications from 'expo-notifications';
 import {sendEmail} from '../../frontend/assets/email.js';
 import { sendSMS } from '../../frontend/assets/SMS.js';
-import Notifs from '../../frontend/assets/notifs.js'; // Correct way to import a default export
+import {Notifs} from '../../frontend/assets/notifs.js'; // Correct way to import a default export
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedication, medicationId, expectedCheck }) => {
+const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedication, medicationId, medicationName, expectedCheck, handleRefillDate }) => {
 
     const [isChecked, setIsChecked] = useState(false); 
     const [numChecked, setNumChecked] = useState(0);
     const [timerId, setTimerId] = useState(null);
-
     
-
     const determineBody = (pill) => {
     if (pill === "Yes") {
         return 'It looks like you have missed a dose. Please double check the pillbox and take the missed dose. Remember to log it in the app!';
@@ -27,7 +25,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
 
   const handleCheckBoxChange = () => {
     setIsChecked(!isChecked);
-    handleTakeMedication(medicationId);
+    handleTakeMedication(medicationId, medicationName );
     setNumChecked(prevNumChecked => prevNumChecked + 1);
   };
 
@@ -38,15 +36,14 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
     const e = await AsyncStorage.getItem('caregiverEmail');
     const p = await AsyncStorage.getItem('caregiverPhone');
     const pill = await AsyncStorage.getItem('pillboxUsed');
-    const name = await AsyncStorage.getItem('userName');
-    const b = await AsyncStorage.getItem('bringsMedication');
+    const userName = await AsyncStorage.getItem('userName');
+    const bringsMedication = await AsyncStorage.getItem('bringsMedication');
     if (numChecked !== expectedCheck) {
         console.log('Testing');
-        if (b === "Someone else") {
-            sendEmail({ email: e, s:'MediMeter: ' + name + ' Missed a Dose', b: 'It looks like ' + name + ' has missed a dose of their medication today. Please consider checking in on them.'});
-            // sendSMS({ number: p, message: 'It looks like' + name + 'has missed a dose of their medication. Please consider checking in on them.'});
+        if (bringsMedication === "Someone else") {
+            // sendEmail({ email: e, s:'MediMeter: ' + userName + ' Missed a Dose', b: 'It looks like ' + userName + ' has missed a dose of their medication today. \nPlease consider checking in on them.'});
+            Notifs(title='Missed Dose', body=determineBody(pill));
         }
-        return <Notifs title={'Missed Dose'} body={determineBody(pill)} />;
     }
   };
 
@@ -69,9 +66,11 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   const calculateTimeUntilMidnight = () => {
     const now = new Date();
     const midnight = new Date();
-    midnight.setHours(1, 22, 0, 0); // Set to midnight
+    midnight.setHours(0, 33, 0, 0); // Set to midnight
     return midnight - now; // Time until midnight in milliseconds
   };
+
+//   handleRefillDate(medicationId);
 
   return (
     <View style={styles.medicationItem}>

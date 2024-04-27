@@ -22,11 +22,11 @@ class Medication(models.Model):
     missed_doses = models.IntegerField(default=0)
     # Add other medication-related fields
 
-class DoseLog(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    medication = models.ForeignKey(Medication, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField()
+# class DoseLog(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     medication = models.ForeignKey(Medication, on_delete=models.CASCADE)
+#     date = models.DateField()
+#     time = models.TimeField()
 
 class RefillReminder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -47,12 +47,11 @@ class Notification(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     delivered = models.BooleanField(default=False)
     pillbox_used = models.BooleanField(default=False)
-    # Add other notification-related fields
 
-class Dashboard(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    medication = models.ForeignKey(Medication, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField()
-    # Add other dashboard-related fields
+# class Dashboard(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     medication = models.ForeignKey(Medication, on_delete=models.CASCADE)
+#     date = models.DateField()
+#     time = models.TimeField()
+#     # Add other dashboard-related fields
 

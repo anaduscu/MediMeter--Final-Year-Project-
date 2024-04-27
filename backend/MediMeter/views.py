@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from django.core import serializers
 from .models import Medication
+from datetime import date, timedelta
+
 
 
 def get_csrf_token(request):
@@ -235,9 +237,35 @@ def increase_stock (request, medication_id):
 def decrease_stock (request, medication_id):
     try:
         medication = Medication.objects.get(pk=medication_id)
-        medication.current_stock -= 1
+        if medication.current_stock <= 0:
+            return JsonResponse({'error': 'Stock is already 0'}, status=400)
+        else:
+            medication.current_stock -= 1
         medication.save()
         return JsonResponse({'message': 'Stock updated successfully'})
+    except Medication.DoesNotExist:
+        return JsonResponse({'error': 'Medication does not exist'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+def get_stock(request, medication_id):
+    try:
+        medication = Medication.objects.get(pk=medication_id)
+        return JsonResponse({'current_stock': medication.current_stock})
+    except Medication.DoesNotExist:
+        return JsonResponse({'error': 'Medication does not exist'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+    
+def set_refill_date(request, medication_id):
+    try:
+        medication = Medication.objects.get(pk=medication_id)
+        current_stock = medication.current_stock
+        days_until_refill = current_stock - 2 # Assuming each stock lasts for one day
+        refill_date = date.today() + timedelta(days=days_until_refill)
+        medication.refill_date = refill_date
+        medication.save()
+        return JsonResponse({'message': 'Refill date updated successfully'})
     except Medication.DoesNotExist:
         return JsonResponse({'error': 'Medication does not exist'}, status=404)
     except Exception as e:

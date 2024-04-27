@@ -795,7 +795,7 @@ const styles = StyleSheet.create({
       padding: 15,
       height: 35,
       marginLeft: 155,
-      marginTop: -60,
+      marginTop: -110,
       marginBottom: 10,
       backgroundColor: '#FF443A',
       borderRadius: 10, // Set the border radius to make it rounded

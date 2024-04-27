@@ -8,7 +8,7 @@ export const sendSMS = async (body, to) => {
     const bodyParams = new URLSearchParams({
         Body: body,
         From: '+447888864484',
-        To: to,
+        To: to, 
       });    
       
       try {
