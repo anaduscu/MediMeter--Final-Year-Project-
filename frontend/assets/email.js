@@ -10,32 +10,6 @@ export const sendEmail = async ({email, s, b}) => {
   const subject = s;
   const body = b;
 
-  // try {
-  //   const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Authorization': `Bearer ${apiKey}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       personalizations: [{ to: [{ email: recipientEmail }] }],
-  //       from: { email: senderEmail },
-  //       subject: subject,
-  //       content: [{ type: 'text/plain', value: body }],
-  //     }),
-  //   });
-
-  //   if (response.ok) {
-  //     console.log('Email sent successfully!');
-  //     Alert.alert('Email Sent', 'Test email sent successfully!');
-  //   } else {
-  //     console.error('Failed to send email:', response.statusText);
-  //     Alert.alert('Error', 'Failed to send email. Please try again.');
-  //   }
-  // } catch (error) {
-  //   console.error('Error sending email:', error.message);
-  //   Alert.alert('Error', 'Failed to send email. Please check your network connection.');
-  // }
   try {
     const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
@@ -69,4 +43,3 @@ export const sendEmail = async ({email, s, b}) => {
 
 
 
-// export default EmailScreen;

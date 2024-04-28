@@ -39,9 +39,5 @@ export const sendSMS = async (body, to) => {
     }
   };
   
-//   const handlePress = async () => {
-//     await sendSMS();
-//   };
-
 
 

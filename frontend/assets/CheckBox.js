@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../../frontend/styles.js';
 import { setUserEmail } from '../../frontend/Storage.js';
-import * as Notifications from 'expo-notifications';
 import {sendEmail} from '../../frontend/assets/email.js';
 import { sendSMS } from '../../frontend/assets/SMS.js';
-import {Notifs} from '../../frontend/assets/notifs.js'; // Correct way to import a default export
+import {Notifs} from '../../frontend/assets/notifs.js'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -33,6 +32,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
     console.log('Checking equality...');
     console.log('Number of checked boxes:', numChecked);
     console.log('Expected count:', expectedCheck);
+        // global variables set at registration
     const e = await AsyncStorage.getItem('caregiverEmail');
     const p = await AsyncStorage.getItem('caregiverPhone');
     const pill = await AsyncStorage.getItem('pillboxUsed');
@@ -42,13 +42,15 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
         console.log('Testing');
         if (bringsMedication === "Someone else") {
             // sendEmail({ email: e, s:'MediMeter: ' + userName + ' Missed a Dose', b: 'It looks like ' + userName + ' has missed a dose of their medication today. \nPlease consider checking in on them.'});
-            Notifs(title='Missed Dose', body=determineBody(pill));
+            // sendSMS('It looks like ' + userName + ' has missed a dose of their medication today. \nPlease consider checking in on them.', p);
+            Notifs('Missed Dose', determineBody(pill));
+
         }
     }
   };
 
   useEffect(() => {
-    // Reset checkbox state at a specific time (e.g., midnight)
+    // Reset checkbox state at a specific time ( 9PM)
     const resetAtMidnight = setTimeout(() => {
       checkEquality();
       console.log('Resetting checkboxes...');
@@ -56,7 +58,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
       setNumChecked(0);
     }, calculateTimeUntilMidnight());
 
-    // Clear timeout on component unmount
+    // Clear timeout on component 
     return () => {
       if (timerId) clearInterval(timerId);
       clearTimeout(resetAtMidnight);
@@ -66,7 +68,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   const calculateTimeUntilMidnight = () => {
     const now = new Date();
     const midnight = new Date();
-    midnight.setHours(1,19, 0, 0); // Set to midnight
+    midnight.setHours(14, 40, 30, 0); // Set to 9 PM
     return midnight - now; // Time until midnight in milliseconds
   };
 
