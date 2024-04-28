@@ -1,27 +1,34 @@
+import React from 'react';
 import * as Notifications from 'expo-notifications';
-import { useEffect } from 'react';
+import logo from '../../frontend/assets/logo.png';
 
-export const Notifs = (title, body) => {
-  useEffect(() => {
-    // Schedule a notification for 21:15
-    scheduleNotification();
-  }, []);
-
-  const scheduleNotification = async () => {
-    const trigger = new Date();
-    trigger.setHours(14); // 9 PM
-    trigger.setMinutes(41);
-
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: title,
-        body: body,
-      },
-      trigger,
-    });
+const Notifs = ({ title, body }) => {
+  const sendNotification = async () => {
+    try {
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: title ,
+          body: body ,
+        },
+        trigger: null,
+        ios: {
+          sound: 'default',
+          badge: true,
+          displayInForeground: true,
+          sticky: false,
+          channelId: 'default',
+          icon: logo,
+        },
+      });
+      console.log('Notification sent successfully');
+    } catch (error) {
+      console.error('Error sending notification:', error);
+    }
   };
+
+  sendNotification();
+
+  return null; // Since this component doesn't render anything
 };
 
-  // Call sendNotification when you need to trigger the notification
-  // Example: sendNotification('New Notification', 'This is a test notification');
-
+export default Notifs;

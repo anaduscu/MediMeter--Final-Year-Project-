@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../../frontend/styles.js';
 import { setUserEmail } from '../../frontend/Storage.js';
+import * as Notifications from 'expo-notifications';
 import {sendEmail} from '../../frontend/assets/email.js';
 import { sendSMS } from '../../frontend/assets/SMS.js';
-import {Notifs} from '../../frontend/assets/notifs.js'; 
+import Notifs from '../../frontend/assets/notifs.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -15,11 +16,11 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
     const [timerId, setTimerId] = useState(null);
     
     const determineBody = (pill) => {
-    if (pill === "Yes") {
-        return 'It looks like you have missed a dose. Please double check the pillbox and take the missed dose. Remember to log it in the app!';
-    } else {
-        return 'It looks like you have missed a dose. Please take the missed dose. Remember to log it in the app!';
-    }
+        if (pill === "Yes") {
+            return 'It looks like you have missed a dose. Please double check your pillbox and take it. Remember to log it in the app!';
+        } else {
+            return 'It looks like you have missed a dose. Please take it and remember to log it in the app!';
+        }
     };
 
   const handleCheckBoxChange = () => {
@@ -32,19 +33,16 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
     console.log('Checking equality...');
     console.log('Number of checked boxes:', numChecked);
     console.log('Expected count:', expectedCheck);
-        // global variables set at registration
     const e = await AsyncStorage.getItem('caregiverEmail');
     const p = await AsyncStorage.getItem('caregiverPhone');
     const pill = await AsyncStorage.getItem('pillboxUsed');
     const userName = await AsyncStorage.getItem('userName');
     const bringsMedication = await AsyncStorage.getItem('bringsMedication');
     if (numChecked !== expectedCheck) {
-        console.log('Testing');
         if (bringsMedication === "Someone else") {
             // sendEmail({ email: e, s:'MediMeter: ' + userName + ' Missed a Dose', b: 'It looks like ' + userName + ' has missed a dose of their medication today. \nPlease consider checking in on them.'});
             // sendSMS('It looks like ' + userName + ' has missed a dose of their medication today. \nPlease consider checking in on them.', p);
-            Notifs('Missed Dose', determineBody(pill));
-
+            Notifs({title:'Missed Dose', body:determineBody(pill)});
         }
     }
   };
@@ -68,7 +66,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   const calculateTimeUntilMidnight = () => {
     const now = new Date();
     const midnight = new Date();
-    midnight.setHours(14, 40, 30, 0); // Set to 9 PM
+    midnight.setHours(20, 22, 30, 0); // Set to 9 PM
     return midnight - now; // Time until midnight in milliseconds
   };
 

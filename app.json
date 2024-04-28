@@ -4,7 +4,7 @@
     "slug": "MediMeter",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "..frontend/assets/logo.png",
     "userInterfaceStyle": "light",
     "permissions": ["CAMERA", "CAMERA_ROLL"],
     "splash": {
@@ -15,8 +15,14 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "notification": {
+        "icon": "..frontend/assets/logo.png",
+        "color": "teal",
+        "sound": true
+      }
     },
     "android": {
       "adaptiveIcon": {

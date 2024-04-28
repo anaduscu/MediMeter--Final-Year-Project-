@@ -3,7 +3,7 @@ import { ScrollView, Text, View , Image, TouchableOpacity, Alert} from 'react-na
 import CheckBox from '../../frontend/assets/CheckBox.js';
 import styles from '../../frontend/styles.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Notifs } from '../../frontend/assets/notifs.js'; // Correct import path
+import Notifs from '../../frontend/assets/notifs.js';
 import Storage from '../../frontend/Storage.js';
 import {sendEmail} from '../../frontend/assets/email.js';
 import { sendSMS } from '../../frontend/assets/SMS.js';
@@ -70,7 +70,7 @@ const Schedule = () => {
         } else {
           const lowstock = handleLowStock(medicationId);
           if (lowstock) {
-            Notifs('Low Stock', 'You are running low on ' + medicationName + '. Please refill your stock.');
+            Notifs({title: 'Low Stock', body: 'You are running low on ' + medicationName + '. Please refill your stock.'});
             const bringsMedication = await AsyncStorage.getItem('bringsMedication');
             const userName = await AsyncStorage.getItem('userName');
             const e = await AsyncStorage.getItem('caregiverEmail');
