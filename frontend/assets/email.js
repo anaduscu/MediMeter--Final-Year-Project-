@@ -55,14 +55,14 @@ export const sendEmail = async ({email, s, b}) => {
   
     if (response.ok) {
       console.log('Email sent successfully!');
-      Alert.alert('Email Sent', 'Test email sent successfully!');
+      console.log('Email Sent', 'Test email sent successfully!');
     } else {
       console.error('Failed to send email:', response.statusText);
-      Alert.alert('Error', 'Failed to send email. Please try again.');
+      console.log('Error', 'Failed to send email. Please try again.');
     }
   } catch (error) {
     console.error('Error sending email:', error.message);
-    Alert.alert('Error', 'Failed to send email. Please check your network connection.');
+    console.log('Error', 'Failed to send email. Please check your network connection.');
   }
   
 } 

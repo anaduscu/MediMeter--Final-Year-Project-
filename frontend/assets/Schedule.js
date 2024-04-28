@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, View , Image, TouchableOpacity} from 'react-native';
+import { ScrollView, Text, View , Image, TouchableOpacity, Alert} from 'react-native';
 import CheckBox from '../../frontend/assets/CheckBox.js';
 import styles from '../../frontend/styles.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,6 +7,7 @@ import { Notifs } from '../../frontend/assets/notifs.js'; // Correct import path
 import Storage from '../../frontend/Storage.js';
 import {sendEmail} from '../../frontend/assets/email.js';
 import { sendSMS } from '../../frontend/assets/SMS.js';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Schedule = () => {
@@ -37,7 +38,13 @@ const Schedule = () => {
       } else {
         const data = await response.json();
         setMedications(data.medications);
+        medications.forEach(medication => {
+            if (medication.refill_date === '2025-01-01' || medication === null) {
+                handleRefillDate(medication.id);
+            }
+        });
       }
+      
     }
     catch (error) {
       console.log('Error getting medications:', error);
@@ -70,7 +77,7 @@ const Schedule = () => {
             const p = await AsyncStorage.getItem('caregiverPhone');
             console.log(p);
             if (bringsMedication === "Someone else") {
-                sendEmail({ email: e, s:'MediMeter: Low Medication Stock', b: userName + " is running low on " + medicationName + ". \nYou may want to refill their stock."});
+                // sendEmail({ email: e, s:'MediMeter: Low Medication Stock', b: userName + " is running low on " + medicationName + ". \nYou may want to refill their stock."});
                 // sendSMS (userName + " is running low on " + medicationName + ". \nYou may want to refill their stock.", p);
             }
         }
@@ -135,12 +142,10 @@ const Schedule = () => {
             if (!response.ok) {
               throw new Error('Failed to set refill date');
             } else {
-              Alert.alert('Refill date set', 'Refill date set successfully.');
-              navigation.navigate('MedList');
+              console.log('Refill date set', 'Refill date set successfully.');
             }
           } catch (error) {
             console.error('Error setting refill date:', error);
-            Alert.alert('Something went wrong', 'Failed to set refill date: ' + error.message);
           }
     };
   
@@ -171,6 +176,9 @@ const Schedule = () => {
         afternoon.push(medication);
         evening.push(medication);
     }
+    if (medication.refill_date === '2025-01-01' || medication === null) {
+        handleRefillDate(medication.id);
+        }    
     });
 
     const expectedCheck = morning.length + afternoon.length + evening.length;
@@ -201,7 +209,6 @@ const Schedule = () => {
                                     medicationId={medication.id}  // Pass the medication ID
                                     medicationName={medication.name}
                                     expectedCheck={morning.length}
-                                    handleRefillDate={handleRefillDate}
                                 />
                             </View>
                         ))}
@@ -222,7 +229,6 @@ const Schedule = () => {
                                     medicationId={medication.id}  // Pass the medication ID
                                     medicationName={medication.name}
                                     expectedCheck={afternoon.length}
-                                    handleRefillDate={handleRefillDate}
                                 />
                             </View>
                         ))}
@@ -243,7 +249,6 @@ const Schedule = () => {
                                     medicationId={medication.id}  // Pass the medication ID
                                     medicationName={medication.name}
                                     expectedCheck={evening.length}
-                                    handleRefillDate={handleRefillDate}
                                 />
                             </View>
                         ))}

@@ -9,7 +9,7 @@ import {Notifs} from '../../frontend/assets/notifs.js'; // Correct way to import
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedication, medicationId, medicationName, expectedCheck, handleRefillDate }) => {
+const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedication, medicationId, medicationName, expectedCheck }) => {
 
     const [isChecked, setIsChecked] = useState(false); 
     const [numChecked, setNumChecked] = useState(0);
@@ -66,11 +66,10 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   const calculateTimeUntilMidnight = () => {
     const now = new Date();
     const midnight = new Date();
-    midnight.setHours(0, 33, 0, 0); // Set to midnight
+    midnight.setHours(1,19, 0, 0); // Set to midnight
     return midnight - now; // Time until midnight in milliseconds
   };
 
-//   handleRefillDate(medicationId);
 
   return (
     <View style={styles.medicationItem}>

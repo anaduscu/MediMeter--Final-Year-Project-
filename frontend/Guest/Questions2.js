@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity, Keyboard} from 'react-native';
+import { Text, View, Image, TouchableOpacity, Keyboard, Alert } from 'react-native';
 import styles from '../styles.js';
 import logo from '../../frontend/assets/logo.png';
 import { useNavigation } from '@react-navigation/native';
@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-const Questions1 = () => {
+const Questions2 = () => {
   const navigation = useNavigation();
   const [selectedOption1, setSelectedOption1] = useState('');
 
@@ -134,4 +134,4 @@ const Questions1 = () => {
   );
 };
 
-export default Questions1;
+export default Questions2;
