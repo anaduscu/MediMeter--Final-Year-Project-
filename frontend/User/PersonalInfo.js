@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Touchable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../../frontend/styles.js';
 import logo from '../../frontend/assets/logo.png';
@@ -51,8 +51,34 @@ const PersonalInfo = () => {
         fetchPersonalInfo();
     }, []);
 
+    const handelLogout = async () => {
+        try {
+            navigation.navigate('Login');
+        } catch (e) {
+            console.error('Error logging out:', e);
+        }
+    };
+
+    const handleLogoutWithConfirmation = () => {
+        Alert.alert(
+            'Log out',
+            'Are you sure you want to log out?',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                { text: 'Yes', onPress: () => handleLogout() },
+            ],
+            { cancelable: false }
+        );
+    }
+
     return (
         <View style={[styles.container,{marginTop:-100}]}>
+            <TouchableOpacity style={[styles.backbutton, {marginLeft:20, marginBottom:-90}]} onPress={() => handleLogoutWithConfirmation()}>
+                <Text style={styles.buttonText}>LOG OUT</Text>
+            </TouchableOpacity>
             <Image source={logo} style={styles.logo} />
             <Text style={[styles.heading, {marginLeft: 20}]}>Your Personal Information</Text>
             <Text style={[styles.info,{height: 150}]}>Here you can see the personal information you provided when you created your account.</Text>

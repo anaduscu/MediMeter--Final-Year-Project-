@@ -1,12 +1,8 @@
-// Import necessary modules
-import React from 'react';
-import { View, Button, Alert } from 'react-native';
-
 // Function to send email
 export const sendEmail = async ({email, s, b}) => {
   const apiKey = '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';
-  const senderEmail = 'aduscu301017@gmail.com';
-  const recipientEmail = email;
+  const senderEmail = 'aduscu301017@gmail.com'; // Has to be verified in SendGrid (used personal email for testing)
+  const recipientEmail = email; 
   const subject = s;
   const body = b;
 
@@ -25,18 +21,15 @@ export const sendEmail = async ({email, s, b}) => {
       }),
     });
   
-    console.log('Response:', response); // Log the response object
+    // console.log('Response:', response); // Debugging
   
     if (response.ok) {
-      console.log('Email sent successfully!');
-      console.log('Email Sent', 'Test email sent successfully!');
+      console.log('Email sent successfully');
     } else {
       console.error('Failed to send email:', response.statusText);
-      console.log('Error', 'Failed to send email. Please try again.');
     }
   } catch (error) {
     console.error('Error sending email:', error.message);
-    console.log('Error', 'Failed to send email. Please check your network connection.');
   }
   
 } 

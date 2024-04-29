@@ -30,9 +30,9 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   };
 
   const checkEquality = async () => {
-    console.log('Checking equality...');
-    console.log('Number of checked boxes:', numChecked);
-    console.log('Expected count:', expectedCheck);
+    // console.log('Checking equality...');
+    // console.log('Number of checked boxes:', numChecked);
+    // console.log('Expected count:', expectedCheck);
     const e = await AsyncStorage.getItem('caregiverEmail');
     const p = await AsyncStorage.getItem('caregiverPhone');
     const pill = await AsyncStorage.getItem('pillboxUsed');
@@ -66,7 +66,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   const calculateTimeUntilMidnight = () => {
     const now = new Date();
     const midnight = new Date();
-    midnight.setHours(20, 22, 30, 0); // Set to 9 PM
+    midnight.setHours(1, 42, 0, 0); // Set to 9 PM
     return midnight - now; // Time until midnight in milliseconds
   };
 

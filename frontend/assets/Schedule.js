@@ -51,6 +51,7 @@ const Schedule = () => {
     }
   }
 
+
   const handleTakeMedication = async (medicationId, medicationName) => {
     try {
         const csrfResponse = await fetch('http://192.168.0.210:8000/MediMeter/csrf_token/');
@@ -68,14 +69,15 @@ const Schedule = () => {
         if (!response.ok) {
           throw new Error('Failed to decrease stock');
         } else {
-          const lowstock = handleLowStock(medicationId);
-          if (lowstock) {
+          const lowstock = await handleLowStock(medicationId);
+          if (lowstock) { // If the stock is low, send notifications
             Notifs({title: 'Low Stock', body: 'You are running low on ' + medicationName + '. Please refill your stock.'});
             const bringsMedication = await AsyncStorage.getItem('bringsMedication');
             const userName = await AsyncStorage.getItem('userName');
             const e = await AsyncStorage.getItem('caregiverEmail');
             const p = await AsyncStorage.getItem('caregiverPhone');
             console.log(p);
+            console.log(e);
             if (bringsMedication === "Someone else") {
                 // sendEmail({ email: e, s:'MediMeter: Low Medication Stock', b: userName + " is running low on " + medicationName + ". \nYou may want to refill their stock."});
                 // sendSMS (userName + " is running low on " + medicationName + ". \nYou may want to refill their stock.", p);

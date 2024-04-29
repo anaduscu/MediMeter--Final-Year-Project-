@@ -1,4 +1,3 @@
-import { View, Button, Alert } from 'react-native';
 import { encode as base64Encode } from 'base-64';
 
 export const sendSMS = async (body, to) => {
@@ -26,22 +25,13 @@ export const sendSMS = async (body, to) => {
       );
   
       const responseData = await response.json();
-      console.log('Twilio API Response:', responseData);
   
-      if (response.ok) {
-        Alert.alert('SMS Sent', 'Test SMS message sent successfully!');
-      } else {
-        Alert.alert('Error', 'Failed to send SMS message.');
-      }
     } catch (error) {
       console.error('Error sending SMS:', error);
-      Alert.alert('Error', 'Failed to send SMS message.');
     }
   };
   
-//   const handlePress = async () => {
-//     await sendSMS();
-//   };
+
 
 
 
