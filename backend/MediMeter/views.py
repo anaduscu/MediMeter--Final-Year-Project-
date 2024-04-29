@@ -136,6 +136,7 @@ def caregiver(request):
             brings_medication = False
         user = User.objects.get(email=user_email)
 
+        # Create a new caregiver object and save it to the database
         try:
             caregiver = Caregiver(user=user, email=email, phone_number=phone_number, brings_medication=brings_medication)
             caregiver.save()
@@ -163,6 +164,7 @@ def set_medication(request):
         tabletcount = data.get('tabletcount', '')
         current_stock = data.get('current_stock', '')
 
+        # Create a new medication object and save it to the database
         try:
             medication = Medication(user=user, name=name, picture=picture, dosage_instructions=dosage_instructions, frequency=frequency, dietary_restrictions=dietary_restrictions, tabletcount=tabletcount, current_stock=current_stock)
             medication.save()
@@ -197,7 +199,7 @@ def get_personal_info(request):
             caregiver_list = list(caregiver.values())
             print(caregiver_list)
             user_info = {
-                'email': user.email,  # Simplified response with only email
+                'email': user.email,  
                 'firstname': user.firstname,
                 'lastname': user.lastname,
                 'gender': user.gender,
@@ -216,7 +218,7 @@ def get_personal_info(request):
 def delete_medication(request, medication_id):
     try:
         medication = Medication.objects.get(pk=medication_id)
-        medication.delete()
+        medication.delete() # Delete the medication from the database
         return JsonResponse({'message': 'Medication deleted successfully'})
     except Medication.DoesNotExist:
         return JsonResponse({'error': 'Medication does not exist'}, status=404)
@@ -226,7 +228,7 @@ def delete_medication(request, medication_id):
 def increase_stock (request, medication_id):
     try:
         medication = Medication.objects.get(pk=medication_id)
-        medication.current_stock += medication.tabletcount
+        medication.current_stock += medication.tabletcount # Assuming each stock lasts for one day 
         medication.save()
         return JsonResponse({'message': 'Stock updated successfully'})
     except Medication.DoesNotExist:
@@ -237,10 +239,10 @@ def increase_stock (request, medication_id):
 def decrease_stock (request, medication_id):
     try:
         medication = Medication.objects.get(pk=medication_id)
-        if medication.current_stock <= 0:
+        if medication.current_stock <= 0: # Prevent negative stock
             return JsonResponse({'error': 'Stock is already 0'}, status=400)
         else:
-            medication.current_stock -= 1
+            medication.current_stock -= 1 # Taking one tablet means reducing stock by 1
         medication.save()
         return JsonResponse({'message': 'Stock updated successfully'})
     except Medication.DoesNotExist:
@@ -251,7 +253,7 @@ def decrease_stock (request, medication_id):
 def get_stock(request, medication_id):
     try:
         medication = Medication.objects.get(pk=medication_id)
-        return JsonResponse({'current_stock': medication.current_stock})
+        return JsonResponse({'current_stock': medication.current_stock}) # Return the current stock of the medication
     except Medication.DoesNotExist:
         return JsonResponse({'error': 'Medication does not exist'}, status=404)
     except Exception as e:
@@ -261,8 +263,8 @@ def set_refill_date(request, medication_id):
     try:
         medication = Medication.objects.get(pk=medication_id)
         current_stock = medication.current_stock
-        days_until_refill = current_stock - 2 # Assuming each stock lasts for one day
-        refill_date = date.today() + timedelta(days=days_until_refill)
+        days_until_refill = current_stock - 2 # Assuming each stock lasts for one day and refill when there are 2 tablets left
+        refill_date = date.today() + timedelta(days=days_until_refill) # Calculate the refill date as today's date + days_until_refill
         medication.refill_date = refill_date
         medication.save()
         return JsonResponse({'message': 'Refill date updated successfully'})

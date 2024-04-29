@@ -15,6 +15,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
     const [numChecked, setNumChecked] = useState(0);
     const [timerId, setTimerId] = useState(null);
     
+    // Determine the body of the notification based on the pillbox used
     const determineBody = (pill) => {
         if (pill === "Yes") {
             return 'It looks like you have missed a dose. Please double check your pillbox and take it. Remember to log it in the app!';
@@ -23,6 +24,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
         }
     };
 
+  // Handle checkbox change event
   const handleCheckBoxChange = () => {
     setIsChecked(!isChecked);
     handleTakeMedication(medicationId, medicationName );
@@ -30,9 +32,6 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   };
 
   const checkEquality = async () => {
-    // console.log('Checking equality...');
-    // console.log('Number of checked boxes:', numChecked);
-    // console.log('Expected count:', expectedCheck);
     const e = await AsyncStorage.getItem('caregiverEmail');
     const p = await AsyncStorage.getItem('caregiverPhone');
     const pill = await AsyncStorage.getItem('pillboxUsed');
@@ -40,6 +39,7 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
     const bringsMedication = await AsyncStorage.getItem('bringsMedication');
     if (numChecked !== expectedCheck) {
         if (bringsMedication === "Someone else") {
+            // Comented out to avoid using free trial credits on Twilio and SendGrid
             // sendEmail({ email: e, s:'MediMeter: ' + userName + ' Missed a Dose', b: 'It looks like ' + userName + ' has missed a dose of their medication today. \nPlease consider checking in on them.'});
             // sendSMS('It looks like ' + userName + ' has missed a dose of their medication today. \nPlease consider checking in on them.', p);
             Notifs({title:'Missed Dose', body:determineBody(pill)});
@@ -48,26 +48,26 @@ const CheckBox = ({ name, grams, frequency, dietaryRequirements, handleTakeMedic
   };
 
   useEffect(() => {
-    // Reset checkbox state at a specific time ( 9PM)
-    const resetAtMidnight = setTimeout(() => {
-      checkEquality();
+    // Reset checkbox state at a specific time (9PM)
+    const reset = setTimeout(() => {
+      checkEquality(); // Check if the number of pills taken is equal to the expected number before resetting
       console.log('Resetting checkboxes...');
       setIsChecked(false);
       setNumChecked(0);
-    }, calculateTimeUntilMidnight());
+    }, calculateTimeUntil());
 
     // Clear timeout on component 
     return () => {
       if (timerId) clearInterval(timerId);
-      clearTimeout(resetAtMidnight);
+      clearTimeout(reset);
     };
   }, []);
 
-  const calculateTimeUntilMidnight = () => {
+  const calculateTimeUntil= () => {
     const now = new Date();
     const midnight = new Date();
-    midnight.setHours(1, 42, 0, 0); // Set to 9 PM
-    return midnight - now; // Time until midnight in milliseconds
+    midnight.setHours(21, 0, 0, 0); // Set to 9 PM
+    return midnight - now; // Time until 9PM in milliseconds
   };
 
 

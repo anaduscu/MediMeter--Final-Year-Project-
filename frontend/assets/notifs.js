@@ -2,6 +2,7 @@ import React from 'react';
 import * as Notifications from 'expo-notifications';
 import logo from '../../frontend/assets/logo.png';
 
+// Doesnt always send?? 
 const Notifs = ({ title, body }) => {
   const sendNotification = async () => {
     try {
@@ -14,7 +15,7 @@ const Notifs = ({ title, body }) => {
         ios: {
           sound: 'default',
           badge: true,
-          displayInForeground: true,
+          displayInForeground: true,  // Doesn't get recognised ???  FIX
           sticky: false,
           channelId: 'default',
           icon: logo,

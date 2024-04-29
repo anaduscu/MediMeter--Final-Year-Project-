@@ -19,10 +19,7 @@ export const sendEmail = async ({email, s, b}) => {
         subject: subject,
         content: [{ type: 'text/plain', value: body }],
       }),
-    });
-  
-    // console.log('Response:', response); // Debugging
-  
+    });  
     if (response.ok) {
       console.log('Email sent successfully');
     } else {

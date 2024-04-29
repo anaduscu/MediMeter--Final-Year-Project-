@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 const RadioButton = ({ options, selectedOption, onSelect }) => {
   return (
     <View>
-      {options.map((option) => (  // Map through the options array and render a TouchableOpacity for each option
+      {options.map((option) => (  // Map through the options array and render a radio button for each option
         <TouchableOpacity
           key={option.value}
           style={styles.radioButton}
@@ -19,6 +19,7 @@ const RadioButton = ({ options, selectedOption, onSelect }) => {
   );
 };
 
+// Blue when selected, transparent when not selected
 const styles = StyleSheet.create({
   radioButton: {
     flexDirection: 'row',

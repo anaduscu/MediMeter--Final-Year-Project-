@@ -38,7 +38,7 @@ const Schedule = () => {
       } else {
         const data = await response.json();
         setMedications(data.medications);
-        medications.forEach(medication => {
+        medications.forEach(medication => { // Check if the refill date is set to the default value and calculate the refill date if so
             if (medication.refill_date === '2025-01-01' || medication === null) {
                 handleRefillDate(medication.id);
             }
@@ -79,6 +79,7 @@ const Schedule = () => {
             console.log(p);
             console.log(e);
             if (bringsMedication === "Someone else") {
+                // Commented out to avoid using free trial credits on Twilio and SendGrid
                 // sendEmail({ email: e, s:'MediMeter: Low Medication Stock', b: userName + " is running low on " + medicationName + ". \nYou may want to refill their stock."});
                 // sendSMS (userName + " is running low on " + medicationName + ". \nYou may want to refill their stock.", p);
             }
@@ -167,6 +168,7 @@ const Schedule = () => {
     const afternoon = [];
     const evening = [];
 
+    // Split medications into morning, afternoon, and evening
     medications.forEach(medication => {
     if (medication.frequency === 'Once a day') {
         morning.push(medication);
@@ -200,15 +202,15 @@ const Schedule = () => {
                             <Text style={styles.timeofday}>Morning</Text>
                             <Image source={require('../../frontend/assets/sun.png')} style={styles.sun}/>
                         </View>
-                        {morning.map((medication, index) => (
+                        {morning.map((medication, index) => ( // Map through the morning medications and render a CheckBox component for each
                             <View key={index}>
                                 <CheckBox 
                                     name={medication.name} 
                                     grams={medication.dosage_instructions} 
                                     frequency={medication.frequency} 
                                     dietaryRequirements={medication.dietary_restrictions} 
-                                    handleTakeMedication={handleTakeMedication} // Pass the function reference
-                                    medicationId={medication.id}  // Pass the medication ID
+                                    handleTakeMedication={handleTakeMedication} 
+                                    medicationId={medication.id} 
                                     medicationName={medication.name}
                                     expectedCheck={morning.length}
                                 />
@@ -220,15 +222,15 @@ const Schedule = () => {
                             <Text style={styles.timeofday}>Afternoon</Text>
                             <Image source={require('../../frontend/assets/suncloud.png')} style={styles.suncloud}/>
                         </View>
-                        {afternoon.map((medication, index) => (
+                        {afternoon.map((medication, index) => ( // Map through the afternoon medications and render a CheckBox component for each
                             <View key={index}>
                                 <CheckBox 
                                     name={medication.name} 
                                     grams={medication.dosage_instructions} 
                                     frequency={medication.frequency} 
                                     dietaryRequirements={medication.dietary_restrictions} 
-                                    handleTakeMedication={handleTakeMedication} // Pass the function reference
-                                    medicationId={medication.id}  // Pass the medication ID
+                                    handleTakeMedication={handleTakeMedication}
+                                    medicationId={medication.id}  
                                     medicationName={medication.name}
                                     expectedCheck={afternoon.length}
                                 />
@@ -240,15 +242,15 @@ const Schedule = () => {
                             <Text style={styles.timeofday}>Evening</Text>
                             <Image source={require('../../frontend/assets/moon.png')} style={styles.moon}/>
                         </View>
-                        {evening.map((medication, index) => (
+                        {evening.map((medication, index) => ( // Map through the evening medications and render a CheckBox component for each
                             <View key={index}>
                                 <CheckBox 
                                     name={medication.name} 
                                     grams={medication.dosage_instructions} 
                                     frequency={medication.frequency} 
                                     dietaryRequirements={medication.dietary_restrictions} 
-                                    handleTakeMedication={handleTakeMedication} // Pass the function reference
-                                    medicationId={medication.id}  // Pass the medication ID
+                                    handleTakeMedication={handleTakeMedication} 
+                                    medicationId={medication.id}  
                                     medicationName={medication.name}
                                     expectedCheck={evening.length}
                                 />
