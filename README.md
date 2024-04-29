@@ -13,7 +13,9 @@ Installing
 
 ## SET UP:
 open the command line/terminal into the desired directory, run the following commands:
+
 git clone https://github.com/anaduscu/MediMeter--Final-Year-Project-.git
+
 npm install -g expo-cli
 
 ### Install Expo CLI globally
@@ -21,6 +23,7 @@ pip install -r requirements.txt
 
 ## RUNNING THE APPLICATION:
 cd into MediMeter/frontend and run:
+
 cd frontend
 
 ### Install the necessary Node modules for the Expo app.
@@ -36,6 +39,7 @@ nmp install expo-notifications
 
 ### In a separate terminal window, cd into MediMeter/backend
 pip install -r requirements.txt
+
 python manage.py runserver 0.0.0.0:8000
 
 ### Run Expo Metro and use Device camera to scan QR code, which opens the project in the Expo App
