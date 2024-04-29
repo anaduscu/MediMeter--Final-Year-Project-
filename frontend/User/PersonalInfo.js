@@ -6,6 +6,7 @@ import logo from '../../frontend/assets/logo.png';
 import dash from '../../frontend/assets/dash.png';
 import { use } from 'ast-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 
 const PersonalInfo = () => {
     const [personalInfo, setPersonalInfo] = useState('');
@@ -51,9 +52,9 @@ const PersonalInfo = () => {
         fetchPersonalInfo();
     }, []);
 
-    const handelLogout = async () => {
+    const handleLogout = async () => {
         try {
-            navigation.navigate('Login');
+            navigation.navigate('LogIn');
         } catch (e) {
             console.error('Error logging out:', e);
         }
