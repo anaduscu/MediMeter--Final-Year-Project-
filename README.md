@@ -1,4 +1,4 @@
-# Medimeter -  medication management for the elderly
+# MediMeter -  medication management for the elderly
 
 This project is a combination of an Expo mobile app frontend and a Django backend server.
 
