@@ -25,9 +25,13 @@ cd frontend
 
 ### Install the necessary Node modules for the Expo app.
 npm install
+
 npm install -g expo-cli
+
 npm install react-native-fs  
+
 npm install expo-image-picker  
+
 nmp install expo-notifications
 
 ### In a separate terminal window, cd into MediMeter/backend
