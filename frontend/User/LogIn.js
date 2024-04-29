@@ -27,6 +27,7 @@ const LogIn = () => {
       const csrfData = await csrfResponse.json();
       const csrfToken = csrfData.csrf_token;
 
+      // Check if email is valid using regex format: email@domain
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         Alert.alert('Invalid Email', 'Please enter a valid email address.');

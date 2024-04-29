@@ -48,6 +48,7 @@ const Questions2 = () => {
       const csrfData = await csrfResponse.json();
       const csrfToken = csrfData.csrf_token;
 
+      // Check if email is valid using regex format: email@domain
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         Alert.alert('Invalid Email', 'Please enter a valid email address.');
@@ -73,8 +74,8 @@ const Questions2 = () => {
   
       if (!response.ok) {
         const responseData = await response.json();
-        if (responseData.error === 'User with this email already exists') {
-          Alert.alert('Failed to register', 'Looks like you already have an account with this email. Please click the BACK button and select the LOG IN option, or use a different email.');
+        if (responseData.error === 'Caregiver with this email already exists') {
+          Alert.alert('Failed to register', 'Looks like this email has already been used. Please use a different email.');
         } else {
           throw new Error('Failed to register');
         }

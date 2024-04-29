@@ -55,7 +55,6 @@ const Questions1 = () => {
             'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({
-            //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
              email: userEmailString,
              gender: selectedOption1,
         })
@@ -94,7 +93,6 @@ const Questions1 = () => {
           'X-CSRFToken': csrfToken,
       },
       body: JSON.stringify({
-          //HARD CODED CHANGE!!!! MAKE GLOBAL VARIABLE FOR CURRENT USER!!!!!
           email: userEmailString,
           pillbox_used: selectedOption2,
       })

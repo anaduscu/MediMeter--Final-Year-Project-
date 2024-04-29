@@ -37,7 +37,7 @@ const handleDelete = async (medicationId) => {
       if (!response.ok) {
         throw new Error('Failed to delete medication');
       } else {
-        // Handle successful deletion, e.g., update medication list
+        // Update medication list after successful deletion
         getMedications();
       }
     } catch (error) {
@@ -62,7 +62,7 @@ const handleDelete = async (medicationId) => {
       if (!response.ok) {
         throw new Error('Failed to increase stock');
       } else {
-        // Handle successful deletion, e.g., update medication list
+        // Update medication list after successful stock increase
         getMedications();
       }
     } catch (error) {
@@ -143,7 +143,7 @@ const handleDelete = async (medicationId) => {
 
   useEffect(() => {
     getMedications();
-    // Poll for new medications every 20 seconds
+    // Poll for new medications every 5 seconds
     const intervalId = setInterval(getMedications, 5000);
 
     // Clean up interval on component unmount

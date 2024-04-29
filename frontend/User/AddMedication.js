@@ -89,6 +89,7 @@ const AddMedication = () => {
     { label: 'Three times a day', value: 'Three times a day' },
   ];
 
+  // Ask for camera permissions
   const getImageFromCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {
@@ -98,16 +99,17 @@ const AddMedication = () => {
 
   };
 
+  // Function to pick an image from device camera 
   const pickImage = async () => {    
     await getImageFromCamera();    
     let result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images, // Only images
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
     });
-    const uri = result.assets[0].uri;
-    console.log('Image URI:', uri);
+    const uri = result.assets[0].uri; // Index 0 is the image URI
+    console.log('Image URI:', uri); 
 
 
     if (!result.canceled) {

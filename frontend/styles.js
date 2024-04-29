@@ -1,5 +1,5 @@
 /* Styling for entire App */
-// styles.js
+
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({

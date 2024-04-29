@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+//GLOBAL VARIABLES FOR SESSION STORAGE
+
 const setUserEmail = async (email) => {
   try {
     await AsyncStorage.setItem('userEmail', email);
